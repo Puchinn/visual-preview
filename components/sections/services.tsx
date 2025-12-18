@@ -44,7 +44,7 @@ export function Services() {
           }),
         ]}
       >
-        <CarouselContent className="w-full mx-auto gap-x-1 h-full lg:overflow-hidden min-h-[85dvh] bg-white text-white">
+        <CarouselContent className="w-full mx-auto gap-x-1 h-full lg:overflow-hidden min-h-[85vh] min-h-[85dvh] bg-white text-white">
           <ServiceCard
             src="1"
             href="/servicios/vinilos-y-vidrieras"

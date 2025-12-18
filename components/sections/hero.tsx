@@ -13,7 +13,7 @@ const titulos = [
 
 export function Hero() {
   return (
-    <section className="min-h-[60dvh] grid grid-cols-1 items-center max-h-max h-full overflow-hidden z-30 relative pt-16 pb-14 text-center">
+    <section className="min-h-[60vh] min-h-[60dvh] grid grid-cols-1 items-center max-h-max h-full overflow-hidden z-30 relative pt-16 pb-14 text-center">
       <div className="relative">
         <h2 className="sr-only">Presentación</h2>
         <p className="text-white text-[68px] leading-14 pb-5 xl:text-9xl font-dirtylane">
