@@ -13,6 +13,7 @@ const dirtyLane = localFont({
   variable: "--font-dirtylane",
 });
 
+import { IntroProvider } from "@/components/providers/intro-provider";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -61,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${archivo.className} ${dirtyLane.variable} bg-black`}>
-        {children}
+        <IntroProvider>{children}</IntroProvider>
       </body>
     </html>
   );

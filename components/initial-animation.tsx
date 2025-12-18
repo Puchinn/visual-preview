@@ -1,38 +1,38 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useIntro } from "@/components/providers/intro-provider";
 import { CustomLogo } from "./branding/custom-logo-animated/custom-logo";
 
 export function InitialAnimation() {
+  const { hasPlayed, setHasPlayed } = useIntro();
   const [active, setActive] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
-  const [destroy, setDestroy] = useState(false);
 
   useEffect(() => {
-    const idTimeout = setTimeout(() => {
+    if (hasPlayed) return;
+
+    const idActive = setTimeout(() => {
       setActive(true);
     }, 300);
 
-    return () => clearTimeout(idTimeout);
-  }, []);
-
-  useEffect(() => {
-    const idTimeout = setTimeout(() => {
+    const idFade = setTimeout(() => {
       setFadeOut(true);
     }, 5800);
 
-    return () => clearTimeout(idTimeout);
-  }, []);
-
-  useEffect(() => {
-    const idTimeout = setTimeout(() => {
-      setDestroy(true);
+    // Al finalizar la animación, marcamos como visto globalmente
+    const idDestroy = setTimeout(() => {
+      setHasPlayed(true);
     }, 6100);
 
-    return () => clearTimeout(idTimeout);
-  }, []);
+    return () => {
+      clearTimeout(idActive);
+      clearTimeout(idFade);
+      clearTimeout(idDestroy);
+    };
+  }, [hasPlayed, setHasPlayed]);
 
-  if (destroy) return null;
+  if (hasPlayed) return null;
 
   return (
     <div
