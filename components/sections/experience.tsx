@@ -1,6 +1,7 @@
 import { CheckIcon, QualityIcon, TimeIcon } from "@/components/feature-icons";
-import { Plyr } from "plyr-react";
-import "plyr-react/plyr.css";
+import dynamic from "next/dynamic";
+
+const Video = dynamic(() => import("@/components/video"), { ssr: false });
 
 export function Experience() {
   return (
@@ -18,31 +19,7 @@ export function Experience() {
 
       <div className="w-full max-w-6xl mx-auto my-10">
         <div className="relative object-cover w-full bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-900">
-          <Plyr
-            source={{
-              type: "video",
-              sources: [
-                {
-                  src: "5V-TDVcjo64",
-                  provider: "youtube",
-                },
-              ],
-            }}
-            options={{
-              autopause: false,
-              autoplay: true,
-              muted: true,
-              loop: {
-                active: true,
-              },
-              volume: 0,
-              youtube: {
-                muted: true,
-                loop: true,
-                autoplay: true,
-              },
-            }}
-          ></Plyr>
+          <Video />
         </div>
       </div>
 
