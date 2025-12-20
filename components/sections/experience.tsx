@@ -1,4 +1,6 @@
 import { CheckIcon, QualityIcon, TimeIcon } from "@/components/feature-icons";
+import { Plyr } from "plyr-react";
+import "plyr-react/plyr.css";
 
 export function Experience() {
   return (
@@ -15,32 +17,34 @@ export function Experience() {
       </p>
 
       <div className="w-full max-w-6xl mx-auto my-10">
-        <div className="relative w-full aspect-[21/9] bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-900">
-          <video
-            className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-700"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/poster.webp"
-          >
-            <source src={"/main-video.mp4"} type="video/mp4" />
-          </video>
+        <div className="relative object-cover w-full bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-900">
+          <Plyr
+            source={{
+              type: "video",
+              sources: [
+                {
+                  src: "5V-TDVcjo64",
+                  provider: "youtube",
+                },
+              ],
+            }}
+            options={{
+              autopause: false,
+              autoplay: true,
+              muted: true,
+              loop: {
+                active: true,
+              },
+              volume: 0,
+              youtube: {
+                muted: true,
+                loop: true,
+                autoplay: true,
+              },
+            }}
+          ></Plyr>
         </div>
       </div>
-
-      {/* <div className="relative overflow-hidden object-cover mx-auto">
-        <video
-          src={"/main-video.mp4"}
-          className="lg:w-[1200px] aspect-video object-cover mx-auto h-full"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          poster="/poster.webp"
-        ></video>
-      </div> */}
 
       <div className="flex pt-5 items-center md:flex-row flex-wrap md:items-stretch justify-center pb-8 gap-3 lg:gap-10">
         <div className="md:w-full max-w-[350px] rounded-md py-4 px-6 space-y-5">
