@@ -12,6 +12,7 @@ import {
   FacebookIcon,
 } from "lucide-react";
 import { CustomLogo } from "../branding/custom-logo-animated/custom-logo";
+import { siteConfig } from "@/lib/site-config";
 
 export function Footer() {
   return (
@@ -28,16 +29,13 @@ export function Footer() {
                 <p className="text-lg font-bold text-white mb-3">SEGUINOS</p>
                 <ul className="flex gap-3">
                   <li className="text-white hover:scale-105 p-2 rounded-full border">
-                    <a
-                      href="https://www.facebook.com/VisualDesignPage/"
-                      target="_blank"
-                    >
+                    <a href={siteConfig.links.facebook} target="_blank">
                       <span className="sr-only">Siguenos en facebook</span>
                       <FacebookIcon />
                     </a>
                   </li>
                   <li className="text-white hover:scale-105 p-2 rounded-full border">
-                    <a href="https://www.instagram.com/visualdesign1996">
+                    <a href={siteConfig.links.instagram}>
                       <span className="sr-only">Siguenos en instagram</span>
                       <InstagramIcon />
                     </a>
@@ -55,7 +53,7 @@ export function Footer() {
                   <span className="text-sm">+54 9 11 4382 9100</span>
                 </a>
                 <a
-                  href="mailto:info@visuald.com.ar"
+                  href={siteConfig.links.mail}
                   className="flex items-center gap-3 text-slate-300 hover:text-red-500 transition-colors"
                 >
                   <Mail className="w-5 h-5 text-red-500 flex-shrink-0" />
