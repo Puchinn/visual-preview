@@ -3,7 +3,7 @@ export const siteConfig = {
   description:
     "Visual design grafica. Desde 1196 dedicada a la producción de impresiones de gran formato, banners, cartelerías, decoración de vidrieras, vehículos y más.",
   url: "https://visuald.com.ar", // Replace with actual domain if known, or keep as placeholder
-  ogImage: "https://visuald.com.ar/og-image.jpg",
+  ogImage: "https://visuald.com.ar/opengraph-image.jpg",
   links: {
     facebook: "https://www.facebook.com/VisualDesignPage/",
     instagram: "https://www.instagram.com/visualdesignok",
