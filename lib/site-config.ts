@@ -1,7 +1,7 @@
 export const siteConfig = {
-  name: "Visual Design | Soluciones Gráficas Integrales",
+  name: "Visual Design | Calidad al menor costo",
   description:
-    "Visual design grafica. Desde 1196 dedicada a la producción de impresiones de gran formato, banners, cartelerías, decoración de vidrieras, vehículos y más.",
+    "Expertos en comunicación visual: cartelería, banners, gran formato, rotulación de vehículos y diseño comercial..",
   url: "https://visuald.com.ar", // Replace with actual domain if known, or keep as placeholder
   ogImage: "https://visuald.com.ar/opengraph-image.jpg",
   links: {
