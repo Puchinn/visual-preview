@@ -7,8 +7,8 @@ import { Clients } from "@/components/sections/clients";
 import { FaqSection } from "@/components/sections/faqs-section";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/responsive-navbar/navbar";
-import { FloatingWsp } from "@/components/ui/floating-wsp";
 import { InitialAnimation } from "@/components/initial-animation";
+import { FloatingButtons } from "@/components/ui/floating-buttons";
 
 export default function Home() {
   return (
@@ -32,7 +32,7 @@ export default function Home() {
       <Clients />
       <FaqSection />
       <Footer />
-      <FloatingWsp />
+      <FloatingButtons />
     </div>
   );
 }
