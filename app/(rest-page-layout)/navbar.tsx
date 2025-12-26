@@ -132,10 +132,7 @@ export function Navbar() {
                   <li className="text-black hover:scale-105 p-2 rounded-full border">
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <a
-                          href="https://www.instagram.com/visualdesignok"
-                          target="_blank"
-                        >
+                        <a href={siteConfig.links.instagram} target="_blank">
                           <span className="sr-only">Siguenos en instagram</span>
                           <InstagramIcon />
                         </a>
@@ -268,7 +265,7 @@ export function Navbar() {
                       <Facebook size={20} />
                     </a>
                     <a
-                      href="https://www.instagram.com/visualdesignok"
+                      href={siteConfig.links.instagram}
                       target="_blank"
                       className="w-12 h-12 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-white hover:text-white transition"
                     >
