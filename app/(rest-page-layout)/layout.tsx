@@ -1,6 +1,6 @@
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "./navbar";
-import { FloatingWsp } from "@/components/ui/floating-wsp";
+import { FloatingButtons } from "@/components/ui/floating-buttons";
 
 export default function Layout({
   children,
@@ -14,7 +14,7 @@ export default function Layout({
       </header>
       {children}
       <Footer />
-      <FloatingWsp />
+      <FloatingButtons />
     </div>
   );
 }
