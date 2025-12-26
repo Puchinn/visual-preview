@@ -1,6 +1,6 @@
 "use client";
-import type React from "react";
 
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   Mail,
@@ -10,11 +10,14 @@ import {
   Settings,
   InstagramIcon,
   FacebookIcon,
+  ArrowRight,
 } from "lucide-react";
 import { CustomLogo } from "../branding/custom-logo-animated/custom-logo";
 import { siteConfig } from "@/lib/site-config";
+import { Button } from "../ui/button";
 
 export function Footer() {
+  const pathName = usePathname();
   return (
     <footer className="bg-gray-tone-4 relative pt-10 text-white">
       <div className="px-6 py-6 md:px-12">
@@ -170,7 +173,24 @@ export function Footer() {
               </div>
             </div>
 
-            <CustomLogo className="mx-auto" />
+            <div>
+              <CustomLogo className="mx-auto" />
+              {pathName !== "/contacto" ? (
+                <Button
+                  asChild
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold shadow-lg shadow-red-500/50 hover:shadow-red-500/70 transition-all mt-2 duration-300 hover:scale-105"
+                >
+                  <Link
+                    href="/contacto"
+                    className="flex items-center justify-center gap-2"
+                  >
+                    ¡Contactanos Ahora!
+                    <ArrowRight className="w-5 h-5 animate-pulse" />
+                  </Link>
+                </Button>
+              ) : null}
+            </div>
           </div>
 
           <div className="border-t border-slate-700 my-8"></div>
