@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "Visual Design | Calidad al menor costo",
+  name: "Visual Design | Calidad Al Menor Costo",
   description:
     "Expertos en comunicación visual: cartelería, banners, gran formato, rotulación de vehículos y diseño comercial..",
   url: "https://visuald.com.ar", // Replace with actual domain if known, or keep as placeholder
