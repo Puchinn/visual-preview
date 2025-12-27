@@ -29,7 +29,12 @@ export function Footer() {
             <div className="col-span-1">
               <h3 className="sr-only">INFORMACION DE CONTACTO</h3>
               <div className="pb-5">
-                <p className="text-lg font-bold text-white mb-3">SEGUINOS</p>
+                <Link
+                  href="/contacto"
+                  className="text-lg font-bold max-w-max hover:underline hover:border-red-500 block text-white mb-3"
+                >
+                  CONTACTANOS
+                </Link>
                 <ul className="flex gap-3">
                   <li className="text-white hover:scale-105 p-2 rounded-full border">
                     <a href={siteConfig.links.facebook} target="_blank">
