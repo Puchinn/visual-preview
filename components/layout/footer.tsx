@@ -27,7 +27,7 @@ export function Footer() {
         <div className="max-w-7xl mx-auto ">
           {/* Top Section: Logo, Contact, and Newsletter */}
 
-          <div className="grid grid-cols-1 justify-center items-start md:grid-cols-4 gap-12 mb-12">
+          <div className="grid grid-cols-1 justify-center items-start md:grid-cols-3 lg:grid-cols-4 gap-12 mb-12">
             {/* Logo & Contact Section */}
             <div className="col-span-1">
               <h3 className="sr-only">INFORMACION DE CONTACTO</h3>
@@ -181,7 +181,7 @@ export function Footer() {
               </div>
             </div>
 
-            <div>
+            <div className="md:col-span-full col-span-1 lg:col-span-1">
               <CustomLogo className="mx-auto" />
               {pathName !== "/contacto" ? (
                 <Button
