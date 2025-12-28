@@ -19,7 +19,10 @@ import { Button } from "../ui/button";
 export function Footer() {
   const pathName = usePathname();
   return (
-    <footer className="bg-gray-tone-4 relative pt-10 text-white">
+    <footer
+      id="main-footer"
+      className="bg-gray-tone-4  relative pt-10 text-white"
+    >
       <div className="px-6 py-6 md:px-12">
         <div className="max-w-7xl mx-auto ">
           {/* Top Section: Logo, Contact, and Newsletter */}
