@@ -72,7 +72,7 @@ export function Navbar() {
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                       <NavigationMenuItem>
-                        <Link href={"#experience"}>NOSOTROS</Link>
+                        <Link href={"#nosotros"}>NOSOTROS</Link>
                       </NavigationMenuItem>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
@@ -202,7 +202,7 @@ export function Navbar() {
                     {/* NOSOTROS */}
                     <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
                       <Link
-                        href={"#experience"}
+                        href={"#nosotros"}
                         className="font-bold tracking-wide"
                       >
                         NOSOTROS

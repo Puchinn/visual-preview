@@ -6,7 +6,7 @@ const Video = dynamic(() => import("@/components/video"), { ssr: false });
 export function Experience() {
   return (
     <section
-      id="experience"
+      id="nosotros"
       className="text-center py-6 overflow-hidden relative py-3 lg:py-10 text-white"
     >
       <h2 className="sr-only">Experiencia</h2>

@@ -18,38 +18,38 @@ export const siteConfig = {
       path: "/",
     },
     contact: {
-      title: "Contacto",
+      title: "Contacto | Visual Design",
       description:
         "Contactate con Visual Design para solicitar presupuestos y asesoramiento en tus proyectos gráficos.",
       path: "/contacto",
     },
     services: {
       "vinilos-y-vidrieras": {
-        title: "Vinilos y Vidrieras",
+        title: "Vinilos y Vidrieras | Visual Design",
         description:
           "Decoración de vidrieras, esmerilados, vinilos de corte e impresos para locales comerciales y oficinas.",
         path: "/servicios/vinilos-y-vidrieras",
       },
       montados: {
-        title: "Montados",
+        title: "Montados | Visual Design",
         description:
           "Impresiones de alta calidad montadas sobre soportes rígidos como foam board, PVC y alto impacto.",
         path: "/servicios/montados",
       },
       corporeos: {
-        title: "Corpóreos",
+        title: "Corpóreos | Visual Design",
         description:
           "Letras y logotipos corpóreos en polyfan, acero, acrílico y otros materiales para destacar tu marca.",
         path: "/servicios/corporeos",
       },
       "banners-y-carteleria": {
-        title: "Banners y Cartelería",
+        title: "Banners y Cartelería | Visual Design",
         description:
           "Diseño e impresión de banners, lonas front y back, y cartelería para eventos y publicidad.",
         path: "/servicios/banners-y-carteleria",
       },
       "grafica-vehicular": {
-        title: "Gráfica Vehicular",
+        title: "Gráfica Vehicular | Visual Design",
         description:
           "Rotulación y ploteo de vehículos con materiales de alta durabilidad para publicidad móvil.",
         path: "/servicios/grafica-vehicular",
