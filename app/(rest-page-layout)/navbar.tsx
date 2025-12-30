@@ -38,7 +38,7 @@ export function Navbar() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   const services = Object.values(siteConfig.pages.services).map((service) => ({
-    label: service.title,
+    label: service.content_title,
     link: service.path,
   }));
 
@@ -91,7 +91,7 @@ export function Navbar() {
                               <NavigationMenuLink asChild key={service.path}>
                                 <Link href={service.path}>
                                   <div className="text-sm leading-none font-medium">
-                                    {service.title}
+                                    {service.content_title}
                                   </div>
                                   <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
                                     {service.description}

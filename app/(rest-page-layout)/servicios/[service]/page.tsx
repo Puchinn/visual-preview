@@ -42,7 +42,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: serviceData.title,
+    title: serviceData.page_title,
     description: serviceData.description,
   };
 }
@@ -71,7 +71,7 @@ export default async function Page({
           <h1 className="text-white text-6xl z-10 relative text-center lg:text-start lg:text-9xl font-dirtylane">
             {siteConfig.pages.services[
               service as keyof typeof siteConfig.pages.services
-            ]?.title ||
+            ]?.content_title ||
               service
                 .replaceAll("-", " ")
                 .replace(service.charAt(0), service.charAt(0).toUpperCase())}
@@ -105,17 +105,17 @@ export default async function Page({
         <LinkButton
           href={`/servicios/corporeos`}
           active={service === "corporeos"}
-          label="Corporeos"
+          label="Corpóreos"
         />
         <LinkButton
           href={`/servicios/banners-y-carteleria`}
           active={service === "banners-y-carteleria"}
-          label="Banners y Carteleria"
+          label="Banners y Cartelería"
         />
         <LinkButton
           href={`/servicios/grafica-vehicular`}
           active={service === "grafica-vehicular"}
-          label="Grafica Vehicular"
+          label="Gráfica Vehicular"
         />
       </div>
       <div className="px-2 lg:px-0">
