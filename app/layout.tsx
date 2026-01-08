@@ -3,6 +3,7 @@ import { Archivo } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -63,6 +64,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${archivo.className} ${dirtyLane.variable} bg-black`}>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NRWRL79K"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <IntroProvider>{children}</IntroProvider>
       </body>
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-L31BQ35J30" />
@@ -74,6 +83,7 @@ export default function RootLayout({
           gtag('config', 'G-L31BQ35J30');
         `}
       </Script>
+      <GoogleTagManager gtmId="GTM-NRWRL79K" />
     </html>
   );
 }
