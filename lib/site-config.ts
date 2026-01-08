@@ -8,7 +8,7 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/VisualDesignPage/",
     instagram: "https://www.instagram.com/visualgrafica1996",
     mail: "mailto:info@visuald.com.ar",
-    whatsapp: "https://wa.me/5491173593738",
+    whatsapp: "https://wa.me/5491154990028",
   },
   pages: {
     home: {
