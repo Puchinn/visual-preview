@@ -40,13 +40,21 @@ export function Footer() {
                 </Link>
                 <ul className="flex gap-3">
                   <li className="text-white hover:scale-105 p-2 rounded-full border">
-                    <a href={siteConfig.links.facebook} target="_blank">
+                    <a
+                      href={siteConfig.links.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <span className="sr-only">Siguenos en facebook</span>
                       <FacebookIcon />
                     </a>
                   </li>
                   <li className="text-white hover:scale-105 p-2 rounded-full border">
-                    <a href={siteConfig.links.instagram}>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={siteConfig.links.instagram}
+                    >
                       <span className="sr-only">Siguenos en instagram</span>
                       <InstagramIcon />
                     </a>
@@ -73,6 +81,7 @@ export function Footer() {
                 <a
                   href="https://maps.app.goo.gl/nXnfhEQs8aqLt9aB9"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-3 text-slate-300 hover:text-red-500 transition-colors"
                 >
                   <MapPin className="w-5 h-5 text-red-500 flex-shrink-0" />
@@ -145,6 +154,7 @@ export function Footer() {
                     <a
                       href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20un%20diseño%20personalizado..."
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="text-slate-300 hover:text-red-500 transition-colors text-sm"
                     >
                       Diseño Personalizado
@@ -154,6 +164,7 @@ export function Footer() {
                     <a
                       href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20una%20instalación..."
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="text-slate-300 hover:text-red-500 transition-colors text-sm"
                     >
                       Instalación
@@ -163,6 +174,7 @@ export function Footer() {
                     <a
                       href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20un%20asesoramiento..."
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="text-slate-300 hover:text-red-500 transition-colors text-sm"
                     >
                       Asesoramiento
@@ -172,6 +184,7 @@ export function Footer() {
                     <a
                       href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20un%20envío%20a%20domicilio..."
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="text-slate-300 hover:text-red-500 transition-colors text-sm"
                     >
                       Envíos a Domicilio
@@ -206,8 +219,8 @@ export function Footer() {
           {/* Bottom Footer */}
           <div className="flex flex-col md:flex-row justify-center items-center gap-4">
             <div className="text-slate-400 text-sm text-center md:text-right">
-              © 2025 VISUAL DESIGN - Todos los derechos reservados - Tel: (011)
-              4382 – 9100 / 9400
+              © {new Date().getFullYear()} VISUAL DESIGN - Todos los derechos
+              reservados - Tel: (011) 4382 – 9100 / 9400
             </div>
           </div>
         </div>

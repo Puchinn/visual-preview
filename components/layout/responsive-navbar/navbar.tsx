@@ -114,6 +114,7 @@ export function Navbar() {
                         <a
                           href="https://www.facebook.com/VisualDesignPage/"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           <span className="sr-only">Siguenos en facebook</span>
                           <FacebookIcon />
@@ -127,7 +128,11 @@ export function Navbar() {
                   <li className="text-white hover:scale-105 p-2 rounded-full border">
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <a href={siteConfig.links.instagram} target="_blank">
+                        <a
+                          href={siteConfig.links.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <span className="sr-only">Siguenos en instagram</span>
                           <InstagramIcon />
                         </a>
@@ -140,7 +145,7 @@ export function Navbar() {
                   <li className="text-white hover:scale-105 p-2 rounded-full border">
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <a href="mailto:info@visuald.com.ar" target="_blank">
+                        <a href="mailto:info@visuald.com.ar">
                           <span className="sr-only">Envianos un mail</span>
                           <Mail />
                         </a>
@@ -158,7 +163,11 @@ export function Navbar() {
                     size={"lg"}
                     variant="outline"
                   >
-                    <a href="https://wa.me/5491173593738" target="_blank">
+                    <a
+                      href="https://wa.me/5491173593738"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Contactanos al WhatsApp{" "}
                     </a>
                   </Button>
@@ -256,6 +265,7 @@ export function Navbar() {
                     <a
                       href="https://www.facebook.com/VisualDesignPage/"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-white hover:text-white transition"
                     >
                       <Facebook size={20} />
@@ -263,13 +273,13 @@ export function Navbar() {
                     <a
                       href={siteConfig.links.instagram}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-white hover:text-white transition"
                     >
                       <Instagram size={20} />
                     </a>
                     <a
                       href="mailto:info@visuald.com.ar"
-                      target="_blank"
                       className="w-12 h-12 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-white hover:text-white transition"
                     >
                       <Mail size={20} />

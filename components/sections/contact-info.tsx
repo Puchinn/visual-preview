@@ -64,36 +64,40 @@ export default function ContactInfoSection() {
 
         {/* Cards Grid */}
         <div className="grid md:grid-cols-4 gap-6 lg:gap-8">
-          {contacts.map((contact) => (
-            <div
-              key={contact.id}
-              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-primary/15"
-            >
-              {/* Icon */}
-              <div className="text-primary/80 mb-4">{contact.icon}</div>
-
-              {/* Content */}
-              <h3 className="text-xl font-semibold text-red-900 mb-2">
-                {contact.title}
-              </h3>
-
-              {contact.description.map((line, idx) => (
-                <p key={idx} className="text-sm text-primary/60 mb-1">
-                  {line}
-                </p>
-              ))}
-
-              {/* Action Button */}
-              <a
-                href={contact.href}
-                target="_blank"
-                className="mt-6 inline-flex items-center gap-2 text-primary/70 hover:text-primary/80 font-medium group"
+          {contacts.map((contact) => {
+            const isExternal = contact.href.startsWith("http");
+            return (
+              <div
+                key={contact.id}
+                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-primary/15"
               >
-                <span>{contact.action}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
-          ))}
+                {/* Icon */}
+                <div className="text-primary/80 mb-4">{contact.icon}</div>
+
+                {/* Content */}
+                <h3 className="text-xl font-semibold text-red-900 mb-2">
+                  {contact.title}
+                </h3>
+
+                {contact.description.map((line, idx) => (
+                  <p key={idx} className="text-sm text-primary/60 mb-1">
+                    {line}
+                  </p>
+                ))}
+
+                {/* Action Button */}
+                <a
+                  href={contact.href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  className="mt-6 inline-flex items-center gap-2 text-primary/70 hover:text-primary/80 font-medium group"
+                >
+                  <span>{contact.action}</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

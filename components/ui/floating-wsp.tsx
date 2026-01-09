@@ -18,6 +18,7 @@ export function FloatingWsp() {
         <a
           href={siteConfig.links.whatsapp}
           target="_blank"
+          rel="noopener noreferrer"
           className="rounded-full flex items-center justify-center h-[65px] md:h-[80px] w-[65px] md:w-[80px] bg-[#25D366] hover:bg-[#20BA5A] hover:scale-[120%] transition-all duration-200 shadow-lg hover:shadow-xl"
           aria-label="Contactar por WhatsApp"
         >

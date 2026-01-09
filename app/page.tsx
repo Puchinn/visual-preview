@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/responsive-navbar/navbar";
 import { InitialAnimation } from "@/components/initial-animation";
 import { FloatingButtons } from "@/components/ui/floating-buttons";
+import { CarouselLastProjects } from "@/components/ui/carousel-last-projects";
 
 export default function Home() {
   return (
@@ -29,6 +30,7 @@ export default function Home() {
       </div>
       <Experience />
       <Services />
+      <CarouselLastProjects />
       <Clients />
       <FaqSection />
       <Footer />

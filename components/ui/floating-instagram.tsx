@@ -19,6 +19,7 @@ export function InstagramFloatButton() {
         <a
           href={siteConfig.links.instagram}
           target="_blank"
+          rel="noopener noreferrer"
           className="h-[65px] md:h-[80px] flex items-center justify-center w-[65px] md:w-[80px] rounded-full bg-gradient-to-tr from-[#7b2dae] via-[#E1306C] to-[#F56040] hover:scale-[120%] transition-transform duration-200 shadow-lg hover:shadow-xl"
           aria-label="Visitar Instagram"
         >
