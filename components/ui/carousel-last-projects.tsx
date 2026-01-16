@@ -52,6 +52,18 @@ const images: Image[] = [
     src: "/carousel-test/8.jpeg",
     alt: "",
   },
+  {
+    src: "/carousel-test/9.jpeg",
+    alt: "",
+  },
+  {
+    src: "/carousel-test/10.jpeg",
+    alt: "",
+  },
+  {
+    src: "/carousel-test/11.jpeg",
+    alt: "",
+  },
 ];
 
 export function CarouselLastProjects() {
