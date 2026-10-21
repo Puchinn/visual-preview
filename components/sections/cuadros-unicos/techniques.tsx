@@ -24,13 +24,24 @@ const SRC: Record<string, string> = {
 
 export function CuadrosUnicosTechniques() {
   return (
-    <section className="bg-gray-tone-3 py-20 sm:py-28">
+    // overflow-x-clip: el halo LED de la tecnica LED se sale del marco; sin
+    // esto la pagina gana 8px de scroll horizontal en mobile.
+    <section className="overflow-x-clip bg-gray-tone-3 py-20 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <div className="max-w-2xl">
-          <h3 className="font-dirtylane text-[44px] leading-[0.95] sm:text-[64px]">
-            Cómo lo hacemos
-          </h3>
-          <p className="mt-5 text-lg leading-relaxed text-white/60">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-2xl">
+            <p className="mb-5 flex items-center gap-3">
+              <span aria-hidden className="inline-block h-px w-8 bg-primary" />
+              <span className="text-xs font-light tracking-[0.28em] text-gray-tone-2 uppercase">
+                El proceso
+              </span>
+            </p>
+            <h3 className="font-dirtylane text-[44px] leading-[0.95] sm:text-[64px]">
+              Cómo lo{" "}
+              <span className="italic text-primary">hacemos</span>
+            </h3>
+          </div>
+          <p className="max-w-md text-base leading-relaxed text-gray-tone-2">
             Cuatro formas de llegar al mismo resultado: una imagen tuya, bien
             impresa y bien montada.
           </p>
@@ -52,10 +63,10 @@ export function CuadrosUnicosTechniques() {
                   ratio="4 / 5"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
-                <h4 className="mt-6 font-dirtylane text-2xl leading-none">
+                <h4 className="mt-6 font-dirtylane text-3xl leading-none">
                   {technique.name}
                 </h4>
-                <p className="mt-3 text-sm leading-relaxed text-white/55">
+                <p className="mt-3 text-sm font-light leading-relaxed text-gray-tone-2">
                   {technique.description}
                 </p>
               </article>

@@ -46,11 +46,29 @@
   --sidebar-accent-foreground: #333333;
   --sidebar-border: #e5e5e5;
   --sidebar-ring: #a3a3a3;
+
+  /* Colores del marco (componentes/sections/cuadros-unicos/frame.tsx).
+     Viven en :root para que el componente funcione igual en la home y en la
+     submarca; la submarca los sobreescribe en .cu-sub-brand. */
+  --frame-negro: #2b2b2b;
+  --frame-aluminio: #8e9094;
+  --frame-madera: #6b4a2f;
+  --frame-hl-negro: rgba(255, 255, 255, 0.1);
+  --frame-hl-aluminio: rgba(255, 255, 255, 0.42);
+  --frame-hl-madera: rgba(255, 214, 170, 0.18);
+  --frame-depth: rgba(0, 0, 0, 0.75);
+  --frame-bisel: rgba(255, 255, 255, 0.16);
+  --frame-mat-blanco: #f4f1ea;
+  --frame-mat-negro: #141414;
+  --frame-mat-arena: #e3d9c8;
+  --frame-glow: rgba(255, 232, 190, 0.22);
 }
 
 @theme inline {
   --font-archivo: var(--font-archivo);
   --font-dirtylane: var(--font-dirtylane);
+  --font-cu-display: var(--font-cu-display);
+  --font-cu-ui: var(--font-cu-ui);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
@@ -245,4 +263,53 @@
 /* Added check-draw animation utility */
 .animate-check-draw {
   animation: check-draw 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   CUADROS UNICOS — estética de la submarca.
+
+   El sitio tiene un solo tema, con tokens en :root. Tailwind 4 compila las
+   utilidades a referencias a variables crudas (.text-primary compila a
+   color:var(--primary)), así que redefinir esas variables dentro de un
+   contenedor cambia toda la estética de ese subárbol sin tocar una sola
+   clase. Eso es lo que permite que /cuadros-unicos se vea distinto sin
+   tocar el resto del sitio.
+
+   La clase se aplica en app/(rest-page-layout)/cuadros-unicos/layout.tsx.
+   --------------------------------------------------------------------------- */
+.cu-sub-brand {
+  /* Sala: fondo tinta y superficies elevadas. La escala de grises va de claro
+     a oscuro igual que en el sitio (1 = texto sobre fondo oscuro). */
+  --primary: #e0a33c;
+  --primary-light: #e0a33c;
+  --gray-tone-1: #dfe2e4;
+  --gray-tone-2: #8e9296;
+  --gray-tone-3: #14171a;
+  --gray-tone-4: #0c0e10;
+
+  /* Pared de galería: la superficie clara. */
+  --cu-pared: #eae8e3;
+  --cu-tinta: #0c0e10;
+  --cu-ambar: #e0a33c;
+  --cu-texto-2: #8e9296;
+
+  /* Tipografía: el display es editorial, la UI es la misma geométrica de
+     tracking amplio que usa la linea "CUADROS" del logo. */
+  --font-dirtylane: var(--font-cu-display);
+  --font-archivo: var(--font-cu-ui);
+
+  /* Marcos: el ambar es la luz que rebota del LED, y el bisel lleva el
+     detalle del corchete del logo. */
+  --frame-negro: #14171a;
+  --frame-aluminio: #6e747a;
+  --frame-madera: #7a5a34;
+  --frame-hl-negro: rgba(224, 163, 60, 0.16);
+  --frame-hl-aluminio: rgba(224, 163, 60, 0.28);
+  --frame-hl-madera: rgba(224, 163, 60, 0.22);
+  --frame-depth: rgba(0, 0, 0, 0.7);
+  --frame-bisel: rgba(224, 163, 60, 0.55);
+  --frame-mat-blanco: #eae8e3;
+  --frame-mat-negro: #0c0e10;
+  --frame-mat-arena: #ded5c4;
+  --frame-glow: rgba(224, 163, 60, 0.3);
 }

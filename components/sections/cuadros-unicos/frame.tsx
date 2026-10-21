@@ -3,37 +3,42 @@ import { cn } from "@/lib/utils";
 
 export type FrameMaterial = "negro" | "aluminio" | "madera";
 
+/**
+ * Los colores del marco salen de variables CSS (definidas en :root y
+ * sobreescritas por la submarca en .cu-sub-brand) para que el mismo
+ * componente sirva a las dos esteticas sin cambiar de codigo.
+ */
 const MATERIALS: Record<
   FrameMaterial,
   { moulding: string; highlight: string; depth: string }
 > = {
   negro: {
-    moulding: "#2b2b2b",
-    highlight: "rgba(255,255,255,0.10)",
-    depth: "rgba(0,0,0,0.75)",
+    moulding: "var(--frame-negro)",
+    highlight: "var(--frame-hl-negro)",
+    depth: "var(--frame-depth)",
   },
   aluminio: {
-    moulding: "#8e9094",
-    highlight: "rgba(255,255,255,0.42)",
-    depth: "rgba(0,0,0,0.55)",
+    moulding: "var(--frame-aluminio)",
+    highlight: "var(--frame-hl-aluminio)",
+    depth: "var(--frame-depth)",
   },
   madera: {
-    moulding: "#6b4a2f",
-    highlight: "rgba(255,214,170,0.18)",
-    depth: "rgba(0,0,0,0.65)",
+    moulding: "var(--frame-madera)",
+    highlight: "var(--frame-hl-madera)",
+    depth: "var(--frame-depth)",
   },
 };
 
 const MATS = {
-  blanco: "#f4f1ea",
-  negro: "#141414",
-  arena: "#e3d9c8",
+  blanco: "var(--frame-mat-blanco)",
+  negro: "var(--frame-mat-negro)",
+  arena: "var(--frame-mat-arena)",
 } as const;
 
 export type MatColor = keyof typeof MATS;
 
 /**
- * Un cuadro colgado. El motivo es literal: montante, paspartú, imagen y
+ * Un cuadro colgado. El motivo es literal: montante, paspartu, imagen y
  * sombra proyectada sobre la pared.
  */
 export function Frame({
@@ -76,7 +81,7 @@ export function Frame({
         <div
           aria-hidden
           className="pointer-events-none absolute -inset-x-8 -bottom-6 -z-10 h-1/2 rounded-[50%] blur-2xl"
-          style={{ background: "rgba(255,232,190,0.22)" }}
+          style={{ background: "var(--frame-glow)" }}
         />
       )}
 
@@ -95,7 +100,7 @@ export function Frame({
         style={{
           inset: "2.5%",
           border: "1px solid rgba(0,0,0,0.35)",
-          boxShadow: "0 1px 0 rgba(255,255,255,0.16) inset",
+          boxShadow: `0 1px 0 var(--frame-bisel) inset`,
         }}
       />
 

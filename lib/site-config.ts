@@ -25,8 +25,9 @@ export const siteConfig = {
   },
   /**
    * CUADROS UNICOS — submarca de Visual Design.
-   * Comparte paleta y tipografías con la marca madre; se diferencia por el
-   * tratamiento (motivo de marco) y por tener navegación propia.
+   * Tiene paleta y tipografía propias: se aplican con la clase .cu-sub-brand
+   * (ver app/globals.css) sobre la página /cuadros-unicos, de modo que el
+   * resto del sitio no cambia.
    */
   cuadrosUnicos: {
     name: "Cuadros Unicos",
@@ -36,31 +37,32 @@ export const siteConfig = {
     path: "/cuadros-unicos",
     // TODO: reemplazar por el Instagram real de CUADROS UNICOS
     instagram: "https://www.instagram.com/cuadrosunicos",
-    logo: "/cuadros-unicos/logo-cuadros-unicos.svg",
+    logo: "/cuadros-unicos/logo-cuadros-unicos-blanco.svg",
+    logoOscuro: "/cuadros-unicos/logo-cuadros-unicos-negro.svg",
     techniques: [
       {
         slug: "resina",
         name: "Resina",
         description:
-          "Tu imagen encapsulada en resina epóxica, con profundidad y brillo cristalino. Ningún ángulo se ve igual.",
+          "La imagen va encapsulada en una capa de resina epóxica, con relieve y brillo de cristal. Se ve desde cualquier ángulo.",
       },
       {
         slug: "led",
         name: "LED",
         description:
-          "Backlight LED que ilumina la imagen desde atrás, con luz uniforme y sin reflejos sobre el frente.",
+          "Una luz LED por detrás ilumina la imagen desde atrás. La pared también se enciende: el cuadro proyecta su propio resplandor.",
       },
       {
         slug: "marcos",
         name: "Marcos",
         description:
-          "Marcos de madera, aluminio anodizado o negro mate, armados a medida para que encajen en la pared donde va.",
+          "Madera, aluminio anodizado o negro mate. Cada marco se arma a medida y se cuelga con el sistema que corresponde a la pared.",
       },
       {
         slug: "medida",
         name: "A medida",
         description:
-          "Formatos, orientaciones y tamaños libres. Horizontal, vertical o cuadrado, con la imagen que vos quieras.",
+          "Horizontal, vertical o cuadrado, con el tamaño que pida el lugar donde va. Vos elegís la imagen; nosotros la medimos.",
       },
     ],
   },

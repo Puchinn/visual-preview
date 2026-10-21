@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Instagram } from "lucide-react";
+import { Frame } from "@/components/sections/cuadros-unicos/frame";
 import { siteConfig } from "@/lib/site-config";
 
 /**
- * Bloque de CUADROS UNICOS en la home. Comparte paleta con el sitio pero se
- * diferencia por el tratamiento: a diferencia del resto de secciones, esta
- * tiene un marco alrededor, como si el cuadro estuviera colgado en la página.
+ * Bloque de CUADROS UNICOS en la home. Comparte paleta con el sitio —es una
+ * pieza de Visual Design que presenta a la submarca— y se diferencia por el
+ * tratamiento: a diferencia del resto de secciones, esta tiene un marco
+ * alrededor, como si el cuadro estuviera colgado en la pagina.
  */
 export function CuadrosUnicosBanner() {
   return (
@@ -17,31 +19,31 @@ export function CuadrosUnicosBanner() {
           <div className="relative order-1">
             <div className="grid grid-cols-2 gap-4 sm:gap-6">
               <div className="space-y-4 sm:space-y-6">
-                <FrameMock
+                <Frame
                   src="/images/cuadros-unicos/6.webp"
                   alt="Cuadro en resina con marco negro"
-                  material="#2b2b2b"
+                  material="negro"
                   ratio="3 / 4"
                 />
-                <FrameMock
+                <Frame
                   src="/images/cuadros-unicos/10.webp"
                   alt="Cuadro con marco de madera"
-                  material="#6b4a2f"
+                  material="madera"
                   ratio="1 / 1"
                 />
               </div>
               <div className="space-y-4 pt-10 sm:space-y-6 sm:pt-16">
-                <FrameMock
+                <Frame
                   src="/images/cuadros-unicos/12.webp"
                   alt="Cuadro iluminado con LED"
-                  material="#1c1c1c"
+                  material="negro"
                   ratio="1 / 1"
                   glow
                 />
-                <FrameMock
+                <Frame
                   src="/images/cuadros-unicos/8.webp"
                   alt="Cuadro con marco de aluminio"
-                  material="#8e9094"
+                  material="aluminio"
                   ratio="3 / 4"
                 />
               </div>
@@ -52,11 +54,11 @@ export function CuadrosUnicosBanner() {
           <div className="order-2">
             <div className="flex items-center gap-3">
               <Image
-                src={siteConfig.cuadrosUnicos.logo}
-                alt=""
-                width={58}
-                height={41}
-                className="h-auto w-[58px] shrink-0 invert"
+                src={siteConfig.cuadrosUnicos.logoOscuro}
+                alt="Cuadros Unicos"
+                width={592}
+                height={517}
+                className="h-auto w-[104px] shrink-0"
               />
               <span className="text-sm text-gray-600">
                 Submarca de{" "}
@@ -66,7 +68,7 @@ export function CuadrosUnicosBanner() {
               </span>
             </div>
 
-            <h2 className="mt-5 font-dirtylane text-[56px] leading-[0.92] text-gray-tone-4 sm:text-[80px]">
+            <h2 className="mt-6 font-dirtylane text-[56px] leading-[0.92] text-gray-tone-4 sm:text-[80px]">
               Cuadros
               <br />
               <span className="text-primary">Únicos</span>
@@ -105,59 +107,5 @@ export function CuadrosUnicosBanner() {
         </div>
       </div>
     </section>
-  );
-}
-
-/** Versión en blanco del componente Frame, para la sección sobre fondo claro. */
-function FrameMock({
-  src,
-  alt,
-  material,
-  ratio,
-  glow = false,
-}: {
-  src: string;
-  alt: string;
-  material: string;
-  ratio: string;
-  glow?: boolean;
-}) {
-  return (
-    <div className="relative" style={{ aspectRatio: ratio }}>
-      {glow && (
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -inset-x-6 -bottom-4 -z-10 h-1/2 rounded-[50%] blur-2xl"
-          style={{ background: "rgba(255,232,190,0.35)" }}
-        />
-      )}
-
-      <div
-        className="absolute inset-0"
-        style={{
-          background: material,
-          boxShadow: "0 16px 32px -12px rgba(0,0,0,0.45)",
-        }}
-      />
-
-      <div
-        className="absolute"
-        style={{
-          inset: "6%",
-          background: "#f4f1ea",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.25) inset",
-        }}
-      >
-        <div className="absolute overflow-hidden" style={{ inset: "8%" }}>
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            sizes="(max-width: 1024px) 50vw, 25vw"
-            className="object-cover"
-          />
-        </div>
-      </div>
-    </div>
   );
 }

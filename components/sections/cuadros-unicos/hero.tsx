@@ -7,48 +7,60 @@ import { siteConfig } from "@/lib/site-config";
 export function CuadrosUnicosHero() {
   return (
     <section className="relative overflow-hidden bg-gray-tone-4 pt-16 pb-24 sm:pt-24 sm:pb-32">
-      {/* Textura de pared: apenas perceptible, da escala a los cuadros. */}
+      {/* Pared de la sala: la textura va en vertical, como la luz rasante
+          sobre un colgado de galería. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        className="pointer-events-none absolute inset-0 opacity-[0.5]"
         style={{
           backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)",
-          backgroundSize: "4px 4px",
+            "repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 5px)",
+        }}
+      />
+      {/* Luz cálida que baja desde el techo de la sala. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 100% at 50% 0%, rgba(224,163,60,0.13), transparent 70%)",
         }}
       />
 
       <div className="relative mx-auto grid max-w-[1400px] items-center gap-14 px-6 lg:grid-cols-[1fr_1.1fr] lg:gap-20 lg:px-10">
         {/* Texto */}
         <div className="order-2 lg:order-1">
-          <p className="mb-5 flex items-center gap-3">
-            <Image
-              src={siteConfig.cuadrosUnicos.logo}
-              alt=""
-              width={52}
-              height={37}
-              className="h-auto w-[52px] shrink-0"
+          <p className="mb-8 flex items-center gap-3">
+            <span
+              aria-hidden
+              className="inline-block h-px w-8 bg-primary"
             />
-            <span className="text-sm text-white/50">
+            <span className="text-sm font-light tracking-[0.28em] text-gray-tone-2 uppercase">
               Submarca de{" "}
-              <span className="text-white/80">Visual Design</span>
+              <span className="text-white">Visual Design</span>
             </span>
           </p>
 
-          <h2 className="font-dirtylane text-[64px] leading-[0.9] sm:text-[96px] lg:text-[120px]">
-            Cuadros
-            <br />
-            <span className="text-primary-light">Únicos</span>
-          </h2>
+          {/* El logo real de la submarca. Es un wordmark con corchetes que
+              enmarcan: por eso el fondo de la pagina es la pared y el
+              bloque se lee como un cuadro colgado. */}
+          <Image
+            src={siteConfig.cuadrosUnicos.logo}
+            alt="Cuadros Unicos"
+            width={592}
+            height={517}
+            priority
+            className="h-auto w-full max-w-[380px]"
+          />
 
-          <p className="mt-7 max-w-md text-lg leading-relaxed text-white/70">
+          <p className="mt-8 max-w-md text-lg leading-relaxed text-gray-tone-1">
             {siteConfig.cuadrosUnicos.description}
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
             <Link
               href="#contacto-cuadros"
-              className="inline-flex items-center gap-2 bg-primary px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="inline-flex items-center gap-2 bg-primary px-7 py-3.5 text-base font-medium text-gray-tone-4 transition-colors hover:bg-[#eeb34a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               Quiero el mío
             </Link>
@@ -57,7 +69,7 @@ export function CuadrosUnicosHero() {
               href={siteConfig.cuadrosUnicos.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-white/25 px-7 py-3.5 text-base font-medium text-white transition-colors hover:border-white/60 hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="inline-flex items-center gap-2 border border-white/20 px-7 py-3.5 text-base font-light tracking-wide text-white transition-colors hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <Instagram className="size-5" aria-hidden />
               @cuadrosunicos
@@ -67,13 +79,17 @@ export function CuadrosUnicosHero() {
 
         {/* Muro de cuadros */}
         <div className="order-1 lg:order-2">
-          <div className="grid grid-cols-3 items-end gap-3 sm:gap-5">
+          {/* El padding inferior reserva el espacio que ocupa el desplazamiento
+              vertical de los cuadros: si no, el marco de madera pisa las
+              etiquetas de técnica. */}
+          <div className="grid grid-cols-3 items-end gap-3 pb-6 sm:gap-5 sm:pb-8 lg:pb-0">
             <Frame
               src="/images/cuadros-unicos/1.webp"
               alt="Cuadro personalizado en marco negro"
               material="negro"
               ratio="3 / 4"
-              className="translate-y-8"
+              className="translate-y-4 lg:translate-y-8"
+              sizes="(max-width: 1024px) 33vw, 22vw"
             />
             <Frame
               src="/images/cuadros-unicos/3.webp"
@@ -83,21 +99,23 @@ export function CuadrosUnicosHero() {
               sheen
               glow
               priority
+              sizes="(max-width: 1024px) 33vw, 22vw"
             />
             <Frame
               src="/images/cuadros-unicos/5.webp"
               alt="Cuadro con marco de madera"
               material="madera"
               ratio="3 / 4"
-              className="translate-y-12"
+              className="translate-y-6 lg:translate-y-12"
+              sizes="(max-width: 1024px) 33vw, 22vw"
             />
           </div>
 
           {/* Etiquetas de técnica, como fichas de sala. */}
-          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-xs text-white/40 sm:mt-12">
-            <span>Resina</span>
-            <span>LED</span>
-            <span>Marcos a medida</span>
+          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-xs font-light tracking-[0.22em] text-gray-tone-2 uppercase sm:mt-12">
+            {siteConfig.cuadrosUnicos.techniques.map((technique) => (
+              <span key={technique.slug}>{technique.name}</span>
+            ))}
           </div>
         </div>
       </div>

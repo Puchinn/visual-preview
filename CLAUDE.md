@@ -12,7 +12,7 @@ pnpm lint           # eslint — baseline: 0 errores, 2 warnings preexistentes
 
 ## Estructura clave
 - `app/page.tsx` — home. Orden de secciones: `InitialAnimation` → WelcomeModal → Navbar/Hero (video de fondo) → Experience → Services → **CuadrosUnicosBanner** → CarouselLastProjects → Clients → FaqSection → Footer → FloatingButtons
-- `app/(rest-page-layout)/` — layout con Navbar + Footer para `/contacto`, `/servicios/[service]` y `/cuadros-unicos`
+- `app/(rest-page-layout)/` — layout con Navbar + Footer para `/contacto`, `/servicios/[service]` y `/cuadros-unicos`. `site-header.tsx` decide la estética del header según la ruta; `cuadros-unicos/layout.tsx` es el wrapper `.cu-sub-brand` de la submarca.
 - `app/(rest-page-layout)/servicios/[service]/page.tsx` — página de servicio **genérica**: lee `public/images/<service>/` del disco (`getGalleryImages`). El título sale de `siteConfig.pages.services[service]`. Los tabs de servicios están hardcodeados en ese archivo. `generateStaticParams` filtra por `siteConfig.pages.services` para no generar rutas huérfanas.
 - `app/(rest-page-layout)/cuadros-unicos/page.tsx` — submarca CUADROS UNICOS. Hero → Técnicas → Vidriera → Contacto.
 - `lib/site-config.ts` — **fuente de verdad** de textos, links y servicios. `pages.services` alimenta navbar, footer, sitemap y las páginas de servicio. También `cuadrosUnicos` (submarca) y `links.whatsappMessages` (un mensaje por tipo de consulta).
@@ -25,20 +25,29 @@ pnpm lint           # eslint — baseline: 0 errores, 2 warnings preexistentes
 - `public/imagenes-servicios/` — 5 posters + 5 hovers del carrusel de servicios (indexado por número 1–5)
 
 ## CUADROS UNICOS (submarca)
-- Diferenciación por **tratamiento**, no por paleta: el motivo es el marco (moldura + bisel + paspartú + sombra proyectada). Se implementa en `components/sections/cuadros-unicos/frame.tsx` con materiales (`negro` / `aluminio` / `madera`), paspartús (`blanco` / `negro` / `arena`), `sheen` (reflejo de resina) y `glow` (luz LED rebotada).
+- **Estética propia, activa sólo en `/cuadros-unicos`.** El mecanismo es la clase `.cu-sub-brand` (definida en `app/globals.css`), que sobreescribe los tokens de Tailwind dentro de un contenedor. Como las utilidades de Tailwind 4 compilan a referencias a variables crudas (`.text-primary{color:var(--primary)}`), redefinir las variables reestiliza todo el subárbol **sin tocar una sola clase**. La clase se aplica en `app/(rest-page-layout)/cuadros-unicos/layout.tsx`.
+- **Paleta de la submarca** (dentro de `.cu-sub-brand`): tinta `#0C0E10` (fondo), elevado `#14171A`, pared `#EAE8E3`, ámbar LED `#E0A33C` (acento), texto 2º `#8E9296`. Fuera de la submarca sigue el rojo `#c70000` del sitio.
+- **Tipografías de la submarca**: display **Instrument Serif** (400 + itálica) → `--font-cu-display`; UI **Jost** (200/400, tracking amplio) → `--font-cu-ui`. Ambas de `next/font/google`, cargadas en `app/layout.tsx`.
+- **Ojo con `font-family`:** hereda el valor *resuelto*, no la referencia a la variable. Sobreescribir `--font-archivo` en un descendiente **no** cambia la fuente ya resuelta de `<body>`; el wrapper de la submarca necesita la clase explícita `font-cu-ui`.
+- El header y el footer viven **fuera** del wrapper, en `app/(rest-page-layout)/layout.tsx`. Para que la página no tenga un corte de color, `app/(rest-page-layout)/site-header.tsx` mete `.cu-sub-brand` en el `<header>` y pasa `variant="dark"` al `Navbar` cuando la ruta es `/cuadros-unicos`; el footer hace lo propio con `isSubBrand` en `components/layout/footer.tsx`.
+- **Motivo visual:** el marco (moldura + bisel + paspartú + sombra proyectada) en `components/sections/cuadros-unicos/frame.tsx`, con materiales (`negro` / `aluminio` / `madera`), paspartús (`blanco` / `negro` / `arena`), `sheen` (reflejo de resina) y `glow` (luz LED rebotada). Los colores salen de variables CSS (`--frame-*`), definidas en `:root` con los valores del sitio y sobreescritas por la submarca — así el mismo componente sirve a las dos estéticas.
+- **Logo real:** wordmark monocromo (negro `#030304` / blanco) en `public/cuadros-unicos/logo-cuadros-unicos-negro.svg` y `logo-cuadros-unicos-blanco.svg`. `siteConfig.cuadrosUnicos.logo` → blanco (fondo oscuro), `.logoOscuro` → negro (fondo blanco). Se generan con `node scripts/cuadros-logo.mjs` desde los SVG crudos de `recursos/`.
 - Textos, técnicas, logo e IG de la submarca viven en `siteConfig.cuadrosUnicos`.
 - Las fotos de la vidriera se leen de `public/images/cuadros-unicos/` — para reemplazarlas basta con dejar los archivos con los mismos nombres (`1.webp` … `12.webp`). Los placeholders se generan con `node scripts/make-cuadros-placeholders.mjs` (usa `sharp` del store de pnpm, no es dependencia directa).
-- **Pendiente del cliente**: logo real (`public/cuadros-unicos/logo-cuadros-unicos.svg` es un placeholder), URL real del IG (`siteConfig.cuadrosUnicos.instagram` apunta a `instagram.com/cuadrosunicos` por defecto) y fotos reales de la vidriera.
+- **Pendiente del cliente**: URL real del IG (`siteConfig.cuadrosUnicos.instagram` apunta a `instagram.com/cuadrosunicos` por defecto) y fotos reales de la vidriera (las 53 fotos de `recursos/` son paneles LED / vinilos / placas de cartelería apoyados en el banco del taller, ninguna muestra un cuadro montado).
+- `recursos/` está en `.gitignore`: es material crudo (imágenes, videos, `.wfp` de Filmora) que no se trackea. Para tomar algo de ahí, copiarlo a `public/` a mano.
 
 ## Herramientas de desarrollo
-- `scripts/shoot.mjs` — captura de pantalla vía Chrome DevTools Protocol, **sin dependencias externas** (usa el `WebSocket` global de Node 22+). `node scripts/shoot.mjs <url> <salida.png> [ancho] [alto] [fullPage] [script] [waitMs]`. El argumento `script` se evalúa en la página antes de capturar; `waitMs` espera después (necesario para saltar el `InitialAnimation` de ~6 s).
-- `scripts/inspect.mjs` — mismo arnés CDP, pero evalúa una expresión y vuelca consola/excepciones. Sirve para depurar hidratación.
+- `scripts/shoot.mjs` — captura de pantalla vía Chrome DevTools Protocol, **sin dependencias externas** (usa el `WebSocket` global de Node 22+). `node scripts/shoot.mjs <url> <salida.png> [ancho] [alto] [fullPage] [script] [waitMs]`. El argumento `script` se evalúa en la página antes de capturar; `waitMs` espera después (necesario para saltar el `InitialAnimation` de ~6 s). `script` acepta **inline o la ruta a un archivo `.js`** — desde PowerShell, pasar la ruta: el quoting de un string con comillas se rompe.
+- `scripts/inspect.mjs` — mismo arnés CDP, pero evalúa una expresión y vuelca consola/excepciones. `node scripts/inspect.mjs <url> [expr] [ancho] [alto]`. `expr` acepta inline o la ruta a un archivo `.js` (misma recomendación que arriba). Sirve para depurar hidratación y para medir la geometría (`getBoundingClientRect`, `getComputedStyle`).
+- `scripts/cuadros-logo.mjs` — recorta el logo crudo de `recursos/` a los límites del arte y emite las dos variantes monocromas (blanca y negra) en `public/cuadros-unicos/`. Usa `sharp` del store de pnpm.
 - Las capturas se guardan en `.shots/` (ignorado por git).
 
 ## Convenciones de diseño
-- Colores: `--primary: #c70000` (rojo). Escala `--gray-tone-1..4`. Fondo general negro, secciones alternan blanco.
+- Colores: `--primary: #c70000` (rojo). Escala `--gray-tone-1..4` (1 = texto claro, 4 = fondo). Fondo general negro, secciones alternan blanco.
 - `--primary-light: #ef4444` — la variante para texto/link sobre fondo oscuro. `#c70000` sobre negro queda en 2.8:1 y no se lee.
-- Fuentes: `Archivo` (variable `--font-archivo`, cuerpo/UI) y `Dirtylane` (`--font-dirtylane`, títulos display).
+- **Nada de colores literales de Tailwind** (`text-red-500`, `bg-red-600`): no responden a los tokens y rompen el scope de la submarca. Usar `text-primary` / `bg-primary` / `hover:text-primary`.
+- Fuentes: `Archivo` (variable `--font-archivo`, cuerpo/UI) y `Dirtylane` (`--font-dirtylane`, títulos display). La submarca usa Instrument Serif + Jost (ver arriba).
 - Títulos grandes usan `font-dirtylane` a `text-[68px] leading-14` en mobile → `xl:text-9xl`.
 - Un solo `services.tsx` por carpeta; las galerías son dinámicas, no hardcodeadas.
 

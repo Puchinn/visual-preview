@@ -22,7 +22,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 import {
   Tooltip,
@@ -31,12 +31,12 @@ import {
 } from "@/components/ui/tooltip";
 
 import { Button } from "@/components/ui/button";
-import { NavItem, useActiveNav } from "@/components/layout/nav-item";
+import { NavItem, useActiveNav, type NavVariant } from "@/components/layout/nav-item";
 import { useIntent } from "@/components/providers/intent-provider";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site-config";
 
-export function Navbar() {
+export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const isActive = useActiveNav();
@@ -53,8 +53,17 @@ export function Navbar() {
     link: service.path,
   }));
 
+  // En la submarca la barra es oscura. El logo de Visual Design lleva su
+  // circulo blanco en ambos casos, asi que se lee igual sobre tinta.
+  const isDark = variant === "dark";
+
   return (
-    <div className="font-archivo relative lg:py-5 w-full top-0 max-w-[1400px] z-50 mx-auto">
+    <div
+      className={cn(
+        "font-archivo relative lg:py-5 w-full top-0 max-w-[1400px] z-50 mx-auto",
+        isDark && "font-cu-ui"
+      )}
+    >
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <div className="w-full max-w-none">
           <div className="w-full">
@@ -80,11 +89,16 @@ export function Navbar() {
               {/* Desktop Menu */}
               <div className="hidden lg:flex items-center gap-8">
                 <NavigationMenu>
-                  <NavigationMenuList className="gap-x-10 text-black">
+                  <NavigationMenuList
+                    className={cn(
+                      "gap-x-10",
+                      isDark ? "text-white" : "text-black"
+                    )}
+                  >
                     <NavigationMenuItem>
                       <NavItem
                         href="/"
-                        variant="light"
+                        variant={variant}
                         active={isActive("/")}
                       >
                         INICIO
@@ -93,7 +107,7 @@ export function Navbar() {
                     <NavigationMenuItem>
                       <NavItem
                         href="/#nosotros"
-                        variant="light"
+                        variant={variant}
                         active={isActive("/#nosotros")}
                       >
                         NOSOTROS
@@ -102,14 +116,19 @@ export function Navbar() {
                     <NavigationMenuItem>
                       <NavItem
                         href={siteConfig.cuadrosUnicos.path}
-                        variant="light"
+                        variant={variant}
                         active={isActive(siteConfig.cuadrosUnicos.path)}
                       >
                         CUADROS UNICOS
                       </NavItem>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className="bg-transparent text-base p-0 m-0 text-black">
+                      <NavigationMenuTrigger
+                        className={cn(
+                          "bg-transparent text-base p-0 m-0",
+                          isDark ? "text-white" : "text-black"
+                        )}
+                      >
                         SERVICIOS
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
@@ -134,7 +153,7 @@ export function Navbar() {
                     <NavigationMenuItem>
                       <NavItem
                         href="/contacto"
-                        variant="light"
+                        variant={variant}
                         active={isActive("/contacto")}
                       >
                         CONTACTO
@@ -147,7 +166,14 @@ export function Navbar() {
               {/* Desktop Social & CTA */}
               <ul className="hidden lg:flex items-center gap-2">
                 <div className="flex gap-1 items-center">
-                  <li className="text-black hover:scale-105 p-2 rounded-full border">
+                  <li
+                    className={cn(
+                      "hover:scale-105 p-2 rounded-full border",
+                      isDark
+                        ? "text-white border-white/25 hover:text-primary"
+                        : "text-black"
+                    )}
+                  >
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <a
@@ -164,13 +190,20 @@ export function Navbar() {
                       </TooltipContent>
                     </Tooltip>
                   </li>
-                  <li className="text-black hover:scale-105 p-2 rounded-full border">
+                  <li
+                    className={cn(
+                      "hover:scale-105 p-2 rounded-full border",
+                      isDark
+                        ? "text-white border-white/25 hover:text-primary"
+                        : "text-black"
+                    )}
+                  >
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <a
-                          href={siteConfig.links.instagram}
                           target="_blank"
                           rel="noopener noreferrer"
+                          href={siteConfig.links.instagram}
                         >
                           <span className="sr-only">Siguenos en instagram</span>
                           <InstagramIcon />
@@ -181,7 +214,14 @@ export function Navbar() {
                       </TooltipContent>
                     </Tooltip>
                   </li>
-                  <li className="text-black hover:scale-105 p-2 rounded-full border">
+                  <li
+                    className={cn(
+                      "hover:scale-105 p-2 rounded-full border",
+                      isDark
+                        ? "text-white border-white/25 hover:text-primary"
+                        : "text-black"
+                    )}
+                  >
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <a href="mailto:info@visuald.com.ar">
@@ -197,7 +237,12 @@ export function Navbar() {
                 </div>
                 <li className="ml-2">
                   <Button
-                    className="bg-primary border-none rounded-sm font-semibold text-base text-white"
+                    className={cn(
+                      "border-none rounded-sm text-base",
+                      isDark
+                        ? "bg-primary font-medium text-gray-tone-4 hover:bg-[#eeb34a]"
+                        : "bg-primary font-semibold text-white"
+                    )}
                     asChild
                     size={"lg"}
                     variant="outline"
@@ -218,25 +263,46 @@ export function Navbar() {
 
             {/* Mobile Menu */}
             <div className="shadow lg:hidden py-5 relative">
-              <div className="absolute z-10 bg-white inset-0">
+              <div
+                className={cn(
+                  "absolute z-10 inset-0",
+                  isDark ? "bg-gray-tone-4" : "bg-white"
+                )}
+              >
                 <Image
                   src="/logo-rojo-cambiado.svg"
                   width={135}
-                  height={50}
-                  className="mx-auto bg-white rounded-full"
+                  height={135}
+                  className={cn(
+                    "mx-auto bg-white rounded-full",
+                    // En la submarca el header es oscuro y chico: el logo
+                    // grande de 135px tapa el hero.
+                    isDark && "h-16 w-16"
+                  )}
                   alt="Logo"
                 />
               </div>
               <SheetTrigger className="z-20 relative" asChild>
                 <button
-                  className="px-3 text-black hover:text-gray-300 transition-colors"
+                  className={cn(
+                    "px-3 transition-colors",
+                    isDark
+                      ? "text-white hover:text-primary"
+                      : "text-black hover:text-gray-300"
+                  )}
                   aria-label="Toggle menu"
                 >
                   {isOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
               </SheetTrigger>
               <SheetContent className="">
-                <nav className="bg-black pt-10 text-sm text-white min-h-screen flex flex-col">
+                <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
+                <nav
+                  className={cn(
+                    "bg-black pt-10 text-sm text-white min-h-screen flex flex-col",
+                    isDark && "cu-sub-brand"
+                  )}
+                >
                   {/* Menu Items */}
                   <div className="flex-1">
                     {/* INICIO */}
@@ -364,7 +430,12 @@ export function Navbar() {
                   <div className="px-6 py-4">
                     <a
                       href="tel:+541143829100"
-                      className="block w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 text-center rounded transition"
+                      className={cn(
+                        "block w-full text-white font-bold py-3 px-4 text-center rounded transition",
+                        isDark
+                          ? "bg-primary hover:bg-[#eeb34a] hover:text-gray-tone-4"
+                          : "bg-red-600 hover:bg-red-700"
+                      )}
                     >
                       TEL: (011) 4382 - 9100
                     </a>

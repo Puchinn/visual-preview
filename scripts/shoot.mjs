@@ -5,6 +5,9 @@
 //
 // El argumento `script` es opcional: código JS que se evalúa en la página
 // antes de capturar (por ejemplo, para responder el modal de bienvenida).
+// Puede ser el código inline o la ruta a un archivo .js — la ruta es la vía
+// recomendada desde PowerShell, donde el quoting de un string con comillas
+// se escapa mal.
 // `waitMs` es la espera antes de capturar, útil para la animación de entrada.
 
 import { spawn } from "node:child_process";
@@ -20,9 +23,19 @@ const [
   w = "1440",
   h = "900",
   full = "false",
-  evalScript = "",
+  scriptArg = "",
   waitMs = "2500",
 ] = process.argv;
+
+let evalScript = scriptArg;
+
+if (
+  evalScript &&
+  fs.existsSync(evalScript) &&
+  fs.statSync(evalScript).isFile()
+) {
+  evalScript = fs.readFileSync(evalScript, "utf8");
+}
 
 const CHROME = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const PORT = 9333 + Math.floor(Math.random() * 300);

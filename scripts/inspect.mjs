@@ -1,11 +1,22 @@
 // Inspecciona la página: devuelve info de la consola y estilos calculados.
-// Uso: node scripts/inspect.mjs <url> [expr]
+// Uso: node scripts/inspect.mjs <url> [expr] [ancho] [alto]
+//
+// Si expr es la ruta a un archivo .js, se lee de ahi. Es la via recomendada
+// desde PowerShell, donde las comillas de una expresion con strings se
+// escapan mal.
 import { spawn } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-const [, , url, expr = "1"] = process.argv;
+let expr = process.argv[3] ?? "1";
+const url = process.argv[2];
+const W = process.argv[4] ?? "1440";
+const H = process.argv[5] ?? "900";
+
+if (expr && expr !== "1" && fs.existsSync(expr) && fs.statSync(expr).isFile()) {
+  expr = fs.readFileSync(expr, "utf8");
+}
 
 const CHROME = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const PORT = 9600 + Math.floor(Math.random() * 300);
@@ -19,7 +30,7 @@ const chrome = spawn(CHROME, [
   "--no-default-browser-check",
   `--user-data-dir=${profileDir}`,
   `--remote-debugging-port=${PORT}`,
-  "--window-size=1440,900",
+  `--window-size=${W},${H}`,
   "about:blank",
 ]);
 
@@ -88,6 +99,12 @@ const send = (method, params = {}) =>
 
 await send("Page.enable");
 await send("Runtime.enable");
+await send("Emulation.setDeviceMetricsOverride", {
+  width: Number(W),
+  height: Number(H),
+  deviceScaleFactor: 1,
+  mobile: false,
+});
 await send("Page.navigate", { url });
 await new Promise((resolve) => {
   const onMsg = (ev) => {

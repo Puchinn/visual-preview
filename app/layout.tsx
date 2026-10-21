@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo } from "next/font/google";
+import { Archivo, Instrument_Serif, Jost } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
@@ -13,6 +13,22 @@ const archivo = Archivo({
 const dirtyLane = localFont({
   src: "/fonts/Dirtylane.otf",
   variable: "--font-dirtylane",
+});
+
+/* Tipografías de la submarca CUADROS UNICOS. Se cargan siempre (0 requests
+   extra: next/font las sirve desde el build) y solo se activan dentro de
+   .cu-sub-brand, que redefine --font-dirtylane y --font-archivo. */
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-cu-display",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+});
+
+const jost = Jost({
+  variable: "--font-cu-ui",
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500"],
 });
 
 import { IntroProvider } from "@/components/providers/intro-provider";
@@ -64,7 +80,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${archivo.className} ${dirtyLane.variable} bg-black`}>
+      <body
+        className={`${archivo.className} ${dirtyLane.variable} ${instrumentSerif.variable} ${jost.variable} bg-black`}
+      >
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-NRWRL79K"

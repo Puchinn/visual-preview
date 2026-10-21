@@ -16,13 +16,19 @@ import {
 import { CustomLogo } from "../branding/custom-logo-animated/custom-logo";
 import { siteConfig } from "@/lib/site-config";
 import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 export function Footer() {
   const pathName = usePathname();
+  const isSubBrand = pathName === "/cuadros-unicos";
+
   return (
     <footer
       id="main-footer"
-      className="bg-gray-tone-4  relative pt-10 text-white"
+      className={cn(
+        "bg-gray-tone-4 relative pt-10 text-white",
+        isSubBrand && "cu-sub-brand"
+      )}
     >
       <div className="px-6 py-6 md:px-12">
         <div className="max-w-7xl mx-auto ">
@@ -67,25 +73,25 @@ export function Footer() {
               <div className="space-y-4">
                 <a
                   href="tel:+54(011)43829100"
-                  className="flex items-center gap-3 text-slate-300 hover:text-red-500 transition-colors"
+                  className="flex items-center gap-3 text-slate-300 hover:text-primary transition-colors"
                 >
-                  <Phone className="w-5 h-5 text-red-500 flex-shrink-0" />
+                  <Phone className="w-5 h-5 text-primary flex-shrink-0" />
                   <span className="text-sm">+54 9 11 4382 9100</span>
                 </a>
                 <a
                   href={siteConfig.links.mail}
-                  className="flex items-center gap-3 text-slate-300 hover:text-red-500 transition-colors"
+                  className="flex items-center gap-3 text-slate-300 hover:text-primary transition-colors"
                 >
-                  <Mail className="w-5 h-5 text-red-500 flex-shrink-0" />
+                  <Mail className="w-5 h-5 text-primary flex-shrink-0" />
                   <span className="text-sm">info@visuald.com.ar</span>
                 </a>
                 <a
                   href="https://maps.app.goo.gl/nXnfhEQs8aqLt9aB9"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-slate-300 hover:text-red-500 transition-colors"
+                  className="flex items-center gap-3 text-slate-300 hover:text-primary transition-colors"
                 >
-                  <MapPin className="w-5 h-5 text-red-500 flex-shrink-0" />
+                  <MapPin className="w-5 h-5 text-primary flex-shrink-0" />
                   <span className="text-sm">Santiago del Estero 330, CABA</span>
                 </a>
               </div>
@@ -95,14 +101,14 @@ export function Footer() {
             <div className="col-span-1 flex  ">
               <div>
                 <div className="flex items-center gap-2 mb-6">
-                  <Package className="text-red-500" />
+                  <Package className="text-primary" />
                   <h3 className="text-lg font-bold text-white">PRODUCTOS</h3>
                 </div>
                 <ul className="space-y-3">
                   <li>
                     <Link
                       href="/servicios/banners-y-carteleria"
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Banners y Cartelería
                     </Link>
@@ -110,7 +116,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/servicios/corporeos"
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Corporeos
                     </Link>
@@ -118,7 +124,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/servicios/montados"
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Montados
                     </Link>
@@ -126,7 +132,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/servicios/grafica-vehicular"
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Gráfica Vehicular
                     </Link>
@@ -134,7 +140,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/servicios/vinilos-y-vidrieras"
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Vinilos y Vidrieras
                     </Link>
@@ -147,7 +153,7 @@ export function Footer() {
             <div className="col-span-1 flex ">
               <div>
                 <div className="flex items-center gap-2 mb-6">
-                  <Settings className="text-red-500" />
+                  <Settings className="text-primary" />
                   <h3 className="text-lg font-bold text-white">SERVICIOS</h3>
                 </div>
                 <ul className="space-y-3">
@@ -156,7 +162,7 @@ export function Footer() {
                       href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20un%20diseño%20personalizado..."
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Diseño Personalizado
                     </a>
@@ -166,7 +172,7 @@ export function Footer() {
                       href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20una%20instalación..."
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Instalación
                     </a>
@@ -176,7 +182,7 @@ export function Footer() {
                       href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20un%20asesoramiento..."
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Asesoramiento
                     </a>
@@ -186,7 +192,7 @@ export function Footer() {
                       href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20un%20envío%20a%20domicilio..."
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Envíos a Domicilio
                     </a>
@@ -199,7 +205,7 @@ export function Footer() {
             <div className="col-span-1 flex">
               <div>
                 <div className="flex items-center gap-2 mb-6">
-                  <Frame className="text-red-500" />
+                  <Frame className="text-primary" />
                   <h3 className="text-lg font-bold text-white">
                     {siteConfig.cuadrosUnicos.name.toUpperCase()}
                   </h3>
@@ -208,7 +214,7 @@ export function Footer() {
                   <li>
                     <Link
                       href={siteConfig.cuadrosUnicos.path}
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Ver la submarca
                     </Link>
@@ -218,7 +224,7 @@ export function Footer() {
                       href={siteConfig.cuadrosUnicos.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Instagram
                     </a>
@@ -230,7 +236,7 @@ export function Footer() {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                      className="text-slate-300 hover:text-primary transition-colors text-sm"
                     >
                       Consultar por un cuadro
                     </a>
@@ -245,7 +251,7 @@ export function Footer() {
                 <Button
                   asChild
                   size="lg"
-                  className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold shadow-lg shadow-red-500/50 hover:shadow-red-500/70 transition-all mt-2 duration-300 hover:scale-105"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all mt-2 duration-300 hover:scale-105"
                 >
                   <Link
                     href="/contacto"
