@@ -1,20 +1,11 @@
-import { Frame } from "./frame";
+import Image from "next/image";
 import { siteConfig } from "@/lib/site-config";
 
 /**
- * Cada técnica se ilustra con el mismo cuadro y distinto material, así se
- * entiende la diferencia mirando, no leyendo.
+ * Las tecnicas se presentan como un indice de catalogo: una fila por
+ * tecnica, filete de por medio y una muestra chica a la derecha. Sin
+ * tarjetas ni iconos: el papel hace de soporte.
  */
-const DEMOS: Record<
-  string,
-  { material: "negro" | "aluminio" | "madera"; mat: "blanco" | "negro" | "arena"; sheen: boolean; glow: boolean; matWidth: string }
-> = {
-  resina: { material: "negro", mat: "blanco", sheen: true, glow: false, matWidth: "6%" },
-  led: { material: "negro", mat: "negro", sheen: false, glow: true, matWidth: "6%" },
-  marcos: { material: "madera", mat: "arena", sheen: false, glow: false, matWidth: "10%" },
-  medida: { material: "aluminio", mat: "blanco", sheen: false, glow: false, matWidth: "3%" },
-};
-
 const SRC: Record<string, string> = {
   resina: "/images/cuadros-unicos/2.webp",
   led: "/images/cuadros-unicos/7.webp",
@@ -24,54 +15,51 @@ const SRC: Record<string, string> = {
 
 export function CuadrosUnicosTechniques() {
   return (
-    // overflow-x-clip: el halo LED de la tecnica LED se sale del marco; sin
-    // esto la pagina gana 8px de scroll horizontal en mobile.
-    <section className="overflow-x-clip bg-gray-tone-3 py-20 sm:py-28">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <p className="mb-5 flex items-center gap-3">
-              <span aria-hidden className="inline-block h-px w-8 bg-primary" />
-              <span className="text-xs font-light tracking-[0.28em] text-gray-tone-2 uppercase">
-                El proceso
-              </span>
+    <section
+      id="tecnicas"
+      className="scroll-mt-24 border-t border-[var(--cu-rule)] bg-[var(--cu-white)]"
+    >
+      <div className="mx-auto max-w-[1400px] px-6 py-20 lg:px-10 lg:py-28">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4">
+            <h2 className="font-cu-display text-5xl leading-none text-[var(--cu-ink)] sm:text-6xl">
+              Técnicas
+            </h2>
+            <p className="mt-6 max-w-sm text-base leading-relaxed text-[var(--cu-ink-soft)]">
+              Cuatro formas de llegar al mismo resultado: una imagen tuya,
+              bien impresa y bien montada. Se pueden combinar.
             </p>
-            <h3 className="font-dirtylane text-[44px] leading-[0.95] sm:text-[64px]">
-              Cómo lo{" "}
-              <span className="italic text-primary">hacemos</span>
-            </h3>
           </div>
-          <p className="max-w-md text-base leading-relaxed text-gray-tone-2">
-            Cuatro formas de llegar al mismo resultado: una imagen tuya, bien
-            impresa y bien montada.
-          </p>
-        </div>
 
-        <div className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-          {siteConfig.cuadrosUnicos.techniques.map((technique) => {
-            const demo = DEMOS[technique.slug];
-            return (
-              <article key={technique.slug}>
-                <Frame
-                  src={SRC[technique.slug]}
-                  alt={`Ejemplo de cuadro en ${technique.name}`}
-                  material={demo.material}
-                  mat={demo.mat}
-                  sheen={demo.sheen}
-                  glow={demo.glow}
-                  matWidth={demo.matWidth}
-                  ratio="4 / 5"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-                <h4 className="mt-6 font-dirtylane text-3xl leading-none">
-                  {technique.name}
-                </h4>
-                <p className="mt-3 text-sm font-light leading-relaxed text-gray-tone-2">
-                  {technique.description}
-                </p>
-              </article>
-            );
-          })}
+          <div className="lg:col-span-8">
+            <ul className="border-t border-[var(--cu-rule)]">
+              {siteConfig.cuadrosUnicos.techniques.map((technique) => (
+                <li
+                  key={technique.slug}
+                  className="flex items-start gap-6 border-b border-[var(--cu-rule)] py-8 sm:gap-10"
+                >
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-cu-display text-3xl leading-none text-[var(--cu-ink)] sm:text-4xl">
+                      {technique.name}
+                    </h3>
+                    <p className="mt-4 max-w-xl text-sm leading-relaxed text-[var(--cu-ink-soft)]">
+                      {technique.description}
+                    </p>
+                  </div>
+
+                  <div className="relative aspect-square w-20 shrink-0 overflow-hidden bg-[var(--cu-rule)] sm:w-28">
+                    <Image
+                      src={SRC[technique.slug]}
+                      alt={`Ejemplo de cuadro en ${technique.name}`}
+                      fill
+                      sizes="112px"
+                      className="object-cover"
+                    />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

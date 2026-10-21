@@ -1,26 +1,65 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Frame, type FrameMaterial, type MatColor } from "./frame";
 import { siteConfig } from "@/lib/site-config";
 
 /**
- * El muro de la vidriera. Cada pieza cuelga de su alambre y lleva su
- * etiqueta de sala, como en una exposicion: el marco es el motivo de la
- * submarca, asi que se muestra la pieza colgada y no su contenido.
+ * La vidriera como un pliego de laminas: piezas sin marco, epigrafe con
+ * filete y una grilla asimetrica para que el conjunto respire como una
+ * pagina armada a mano y no como una grilla de tarjetas.
  */
-const PIEZAS: { material: FrameMaterial; mat: MatColor; sheen: boolean }[] = [
-  { material: "negro", mat: "blanco", sheen: true },
-  { material: "madera", mat: "arena", sheen: false },
-  { material: "aluminio", mat: "blanco", sheen: false },
-  { material: "negro", mat: "negro", sheen: false },
-  { material: "madera", mat: "blanco", sheen: true },
-  { material: "aluminio", mat: "negro", sheen: false },
+const SPANS = [
+  "lg:col-span-7",
+  "lg:col-span-5",
+  "lg:col-span-4",
+  "lg:col-span-4",
+  "lg:col-span-4",
+  "lg:col-span-5",
+  "lg:col-span-7",
+  "lg:col-span-6",
+  "lg:col-span-6",
+  "lg:col-span-4",
+  "lg:col-span-4",
+  "lg:col-span-4",
+];
+
+const RATIOS = [
+  "4 / 3",
+  "4 / 5",
+  "4 / 5",
+  "4 / 5",
+  "4 / 5",
+  "4 / 5",
+  "4 / 3",
+  "4 / 3",
+  "4 / 3",
+  "4 / 5",
+  "4 / 5",
+  "4 / 5",
 ];
 
 export function CuadrosUnicosGallery({ images }: { images: string[] }) {
   const [active, setActive] = useState<string | null>(null);
+
+  // Cerrar con Escape y bloquear el scroll del fondo mientras el visor
+  // esta abierto.
+  useEffect(() => {
+    if (!active) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActive(null);
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [active]);
 
   if (images.length === 0) {
     return null;
@@ -29,76 +68,66 @@ export function CuadrosUnicosGallery({ images }: { images: string[] }) {
   const tecnicas = siteConfig.cuadrosUnicos.techniques;
 
   return (
-    <section className="bg-gray-tone-4 py-20 sm:py-28">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <p className="mb-5 flex items-center gap-3">
-              <span aria-hidden className="inline-block h-px w-8 bg-primary" />
-              <span className="text-xs font-light tracking-[0.28em] text-gray-tone-2 uppercase">
-                La vidriera
-              </span>
-            </p>
-            <h3 className="font-dirtylane text-[44px] leading-[0.95] sm:text-[64px]">
-              Del taller a{" "}
-              <span className="italic text-primary">la pared</span>
-            </h3>
-            <p className="mt-5 text-lg leading-relaxed text-gray-tone-2">
-              Una muestra de lo que sale del taller. Pasá por el local a verlos
-              en persona: los colores de la resina se ven distintos en persona
-              que en una pantalla.
-            </p>
+    <section
+      id="vidriera"
+      className="scroll-mt-24 border-t border-[var(--cu-rule)] bg-[var(--cu-paper)]"
+    >
+      <div className="mx-auto max-w-[1400px] px-6 py-20 lg:px-10 lg:py-28">
+        <div className="grid items-start gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <h2 className="font-cu-display text-5xl leading-none text-[var(--cu-ink)] sm:text-6xl">
+              La vidriera
+            </h2>
           </div>
 
-          <a
-            href={siteConfig.cuadrosUnicos.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-light tracking-wide text-gray-tone-2 underline-offset-4 transition-colors hover:text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-          >
-            Ver más en Instagram
-          </a>
+          <div className="lg:col-span-5">
+            <p className="max-w-md text-base leading-relaxed text-[var(--cu-ink-soft)]">
+              Una muestra de lo que sale del taller. Pasá por el local a verlos
+              en persona: la resina y la luz cambian según cómo les dé el
+              ambiente.
+            </p>
+            <a
+              href={siteConfig.cuadrosUnicos.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-block text-sm text-[var(--cu-ink)] underline decoration-[var(--cu-rule)] underline-offset-4 transition-colors hover:decoration-[var(--cu-ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cu-ink)]"
+            >
+              Ver más en Instagram
+            </a>
+          </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-x-6 gap-y-14 sm:gap-x-8 lg:grid-cols-3">
+        <div className="mt-14 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:mt-20 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-14">
           {images.map((src, i) => {
-            const pieza = PIEZAS[i % PIEZAS.length];
             const tecnica = tecnicas[i % tecnicas.length];
+            const span = SPANS[i % SPANS.length];
+            const ratio = RATIOS[i % RATIOS.length];
 
             return (
-              <figure key={src} className="group">
-                {/* Alambre: de la pared al cuadro. */}
-                <div
-                  aria-hidden
-                  className="mx-auto mb-0 h-10 w-px bg-gradient-to-b from-transparent to-primary/50 transition-colors group-hover:to-primary"
-                />
-
+              <figure key={src} className={`col-span-1 ${span}`}>
                 <button
                   type="button"
                   onClick={() => setActive(src)}
-                  className="block w-full text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-                  aria-label={`Ampliar cuadro ${i + 1}`}
+                  aria-label={`Ampliar lámina ${i + 1}: ${tecnica.name}`}
+                  className="group block w-full text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cu-ink)]"
                 >
-                  <Frame
-                    src={src}
-                    alt={`Cuadro personalizado en ${tecnica.name.toLowerCase()}`}
-                    material={pieza.material}
-                    mat={pieza.mat}
-                    sheen={pieza.sheen}
-                    ratio="3 / 4"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className="transition-transform duration-500 group-hover:-translate-y-1.5"
-                  />
+                  <div
+                    className="relative w-full overflow-hidden bg-[var(--cu-rule)]"
+                    style={{ aspectRatio: ratio }}
+                  >
+                    <Image
+                      src={src}
+                      alt={`Cuadro personalizado en ${tecnica.name.toLowerCase()}`}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 40vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none"
+                    />
+                  </div>
                 </button>
 
-                {/* Etiqueta de sala. */}
-                <figcaption className="mt-5 flex items-baseline gap-3 border-t border-white/10 pt-3">
-                  <span className="font-dirtylane text-lg leading-none">
-                    {tecnica.name}
-                  </span>
-                  <span className="text-xs font-light tracking-[0.2em] text-gray-tone-2 uppercase">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                <figcaption className="mt-4 flex items-baseline justify-between gap-4 border-t border-[var(--cu-rule)] pt-3 text-xs text-[var(--cu-ink-soft)]">
+                  <span>{tecnica.name}</span>
+                  <span>Lámina {String(i + 1).padStart(2, "0")}</span>
                 </figcaption>
               </figure>
             );
@@ -110,20 +139,22 @@ export function CuadrosUnicosGallery({ images }: { images: string[] }) {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-gray-tone-4/95 p-4 backdrop-blur-sm"
+          aria-label="Vista ampliada de la lámina"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-[var(--cu-paper)] p-4 sm:p-10"
           onClick={() => setActive(null)}
         >
           <button
             type="button"
+            autoFocus
             onClick={() => setActive(null)}
-            className="absolute right-4 top-4 p-2 text-gray-tone-2 transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
+            className="absolute right-4 top-4 border border-[var(--cu-rule)] p-2 text-[var(--cu-ink)] transition-colors hover:bg-[var(--cu-ink)] hover:text-[var(--cu-paper)] focus-visible:outline-2 focus-visible:outline-[var(--cu-ink)] sm:right-8 sm:top-8"
             aria-label="Cerrar"
           >
             <svg
-              className="size-7"
+              className="size-6"
               fill="none"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={1.5}
               viewBox="0 0 24 24"
             >
               <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
@@ -131,15 +162,15 @@ export function CuadrosUnicosGallery({ images }: { images: string[] }) {
           </button>
 
           <div
-            className="relative w-full max-w-3xl"
-            onClick={(e) => e.stopPropagation()}
+            className="relative max-h-full w-full max-w-4xl"
+            onClick={(event) => event.stopPropagation()}
           >
             <Image
               src={active}
               alt="Cuadro ampliado"
-              width={1200}
-              height={1200}
-              className="h-auto w-full"
+              width={1400}
+              height={1400}
+              className="mx-auto h-auto max-h-[85vh] w-auto object-contain"
             />
           </div>
         </div>

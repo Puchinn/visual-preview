@@ -14,21 +14,23 @@ import {
   Frame,
 } from "lucide-react";
 import { CustomLogo } from "../branding/custom-logo-animated/custom-logo";
+import { CuFooter } from "./cu-footer";
 import { siteConfig } from "@/lib/site-config";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
 export function Footer() {
   const pathName = usePathname();
-  const isSubBrand = pathName === "/cuadros-unicos";
+
+  // La submarca tiene su propio pie: no comparte el footer de Visual Design.
+  if (pathName === "/cuadros-unicos") {
+    return <CuFooter />;
+  }
 
   return (
     <footer
       id="main-footer"
-      className={cn(
-        "bg-gray-tone-4 relative pt-10 text-white",
-        isSubBrand && "cu-sub-brand"
-      )}
+      className={cn("bg-gray-tone-4 relative pt-10 text-white")}
     >
       <div className="px-6 py-6 md:px-12">
         <div className="max-w-7xl mx-auto ">

@@ -16,14 +16,15 @@ const sharp = require("../node_modules/.pnpm/sharp@0.34.4/node_modules/sharp");
 
 const OUT_DIR = path.join(__dirname, "..", "public", "images", "cuadros-unicos");
 
-// Paleta derivada de la marca: negro, rojo, grises del sitio.
+// Paleta monocroma: tinta, grises y papel. Sin rojo: la pagina de la
+// submarca es blanco y negro.
 const BACKGROUNDS = [
   "#1c1c1c",
   "#262626",
   "#404040",
-  "#2b1a1a",
+  "#2b2b2b",
   "#1a1a1a",
-  "#332020",
+  "#333333",
 ];
 
 // Formatos: vertical, horizontal y cuadrado, como los cuadros reales.
@@ -39,7 +40,7 @@ const COUNT = 12;
 
 function svgPlaceholder(w, h, index) {
   const bg = BACKGROUNDS[index % BACKGROUNDS.length];
-  const accent = index % 3 === 0 ? "#c70000" : "#ffffff";
+  const accent = index % 3 === 0 ? "#d8d5ce" : "#ffffff";
   const cx = w / 2;
   const cy = h / 2;
   const unit = Math.min(w, h);

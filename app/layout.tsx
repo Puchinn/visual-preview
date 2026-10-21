@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Instrument_Serif, Jost } from "next/font/google";
+import { Archivo, Bodoni_Moda, Hanken_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
@@ -17,18 +17,20 @@ const dirtyLane = localFont({
 
 /* Tipografías de la submarca CUADROS UNICOS. Se cargan siempre (0 requests
    extra: next/font las sirve desde el build) y solo se activan dentro de
-   .cu-sub-brand, que redefine --font-dirtylane y --font-archivo. */
-const instrumentSerif = Instrument_Serif({
+   .cu-sub-brand, que redefine --font-dirtylane y --font-archivo.
+   Papel y tinta: una didone de alto contraste para el display y una grotesca
+   neutra para la interfaz. */
+const bodoniModa = Bodoni_Moda({
   variable: "--font-cu-display",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
 });
 
-const jost = Jost({
+const hankenGrotesk = Hanken_Grotesk({
   variable: "--font-cu-ui",
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500"],
+  weight: ["300", "400", "500", "600"],
 });
 
 import { IntroProvider } from "@/components/providers/intro-provider";
@@ -81,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${archivo.className} ${dirtyLane.variable} ${instrumentSerif.variable} ${jost.variable} bg-black`}
+        className={`${archivo.className} ${dirtyLane.variable} ${bodoniModa.variable} ${hankenGrotesk.variable} bg-black`}
       >
         <noscript>
           <iframe

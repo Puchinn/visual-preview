@@ -164,6 +164,56 @@ if (evalScript) {
 // estados que dependen de una animación larga (ej. el logo de entrada).
 await new Promise((r) => setTimeout(r, Number(waitMs)));
 
+// Las capturas full-page se hacen sin scroll, asi que las imagenes con
+// loading="lazy" nunca llegan a cargar. Recorremos la pagina y volvemos
+// arriba antes de disparar la captura.
+if (full === "true") {
+  await send("Runtime.evaluate", {
+    expression: `(async () => {
+      const step = Math.max(400, window.innerHeight * 0.8);
+      for (let y = 0; y < document.body.scrollHeight; y += step) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 120));
+      }
+      window.scrollTo(0, 0);
+      await new Promise((r) => setTimeout(r, 1200));
+    })()`,
+    awaitPromise: true,
+  });
+}
+
+// Esperar fuentes e imagenes antes de capturar: el optimizador de Next
+// puede tardar en generar los tamanos nuevos y el stitcher de Chrome
+// duplica contenido si la pagina sigue pintando. En full-page las
+// imagenes lazy ya se cargaron al recorrer la pagina; en viewport solo
+// esperamos fuentes (las de abajo nunca se cargarian).
+await send("Runtime.evaluate", {
+  expression:
+    full === "true"
+      ? `(async () => {
+          await document.fonts.ready;
+          await Promise.race([
+            Promise.all(
+              Array.from(document.images).map((img) =>
+                img.complete
+                  ? Promise.resolve()
+                  : new Promise((resolve) => {
+                      img.addEventListener("load", resolve, { once: true });
+                      img.addEventListener("error", resolve, { once: true });
+                    })
+              )
+            ),
+            new Promise((resolve) => setTimeout(resolve, 5000)),
+          ]);
+          await new Promise((r) => setTimeout(r, 400));
+        })()`
+      : `(async () => {
+          await document.fonts.ready;
+          await new Promise((r) => setTimeout(r, 400));
+        })()`,
+  awaitPromise: true,
+});
+
 const shot = await send("Page.captureScreenshot", {
   format: "png",
   captureBeyondViewport: full === "true",

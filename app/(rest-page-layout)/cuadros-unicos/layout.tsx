@@ -6,13 +6,17 @@
  * referencias a esas variables, todo el contenido de la pagina hereda la
  * estetica nueva sin tocar una sola clase.
  *
- * El navbar y el footer viven en el layout padre, fuera de este contenedor:
- * la navegacion mantiene la identidad de Visual Design.
+ * El header y el footer propios tambien llevan la clase, porque viven en
+ * el layout padre (fuera de este contenedor) y necesitan los mismos tokens.
  */
 export default function CuadrosUnicosLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className="cu-sub-brand font-cu-ui">{children}</div>;
+  return (
+    <div className="cu-sub-brand font-cu-ui bg-[var(--cu-paper)] text-[var(--cu-ink)]">
+      {children}
+    </div>
+  );
 }

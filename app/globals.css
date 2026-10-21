@@ -266,7 +266,7 @@
 }
 
 /* ---------------------------------------------------------------------------
-   CUADROS UNICOS — estética de la submarca.
+   CUADROS UNICOS — estética "papel y tinta".
 
    El sitio tiene un solo tema, con tokens en :root. Tailwind 4 compila las
    utilidades a referencias a variables crudas (.text-primary compila a
@@ -275,41 +275,60 @@
    clase. Eso es lo que permite que /cuadros-unicos se vea distinto sin
    tocar el resto del sitio.
 
-   La clase se aplica en app/(rest-page-layout)/cuadros-unicos/layout.tsx.
+   La clase se aplica en la página, el header propio y el footer propio
+   (ver site-header.tsx y footer.tsx).
    --------------------------------------------------------------------------- */
 .cu-sub-brand {
-  /* Sala: fondo tinta y superficies elevadas. La escala de grises va de claro
-     a oscuro igual que en el sitio (1 = texto sobre fondo oscuro). */
-  --primary: #e0a33c;
-  --primary-light: #e0a33c;
-  --gray-tone-1: #dfe2e4;
-  --gray-tone-2: #8e9296;
-  --gray-tone-3: #14171a;
-  --gray-tone-4: #0c0e10;
+  /* Papel y tinta: una sola tinta sobre papel, sin color de acento.
+     La escala de grises mantiene la semantica del sitio
+     (1 = texto principal, 4 = fondo). */
+  --cu-paper: #f7f6f2;
+  --cu-white: #ffffff;
+  --cu-ink: #0b0b0b;
+  --cu-ink-soft: #57544e;
+  --cu-rule: #d8d5ce;
 
-  /* Pared de galería: la superficie clara. */
-  --cu-pared: #eae8e3;
-  --cu-tinta: #0c0e10;
-  --cu-ambar: #e0a33c;
-  --cu-texto-2: #8e9296;
+  --primary: #0b0b0b;
+  --primary-light: #0b0b0b;
+  --gray-tone-1: #0b0b0b;
+  --gray-tone-2: #57544e;
+  --gray-tone-3: #efede6;
+  --gray-tone-4: #f7f6f2;
 
-  /* Tipografía: el display es editorial, la UI es la misma geométrica de
-     tracking amplio que usa la linea "CUADROS" del logo. */
+  /* Tokens de shadcn/ui, para que los componentes compartidos (botones,
+     dialogos, sheet) respondan al papel sin retocar cada clase. */
+  --background: #f7f6f2;
+  --foreground: #0b0b0b;
+  --card: #ffffff;
+  --card-foreground: #0b0b0b;
+  --popover: #ffffff;
+  --popover-foreground: #0b0b0b;
+  --primary-foreground: #f7f6f2;
+  --secondary: #efede6;
+  --secondary-foreground: #0b0b0b;
+  --muted: #efede6;
+  --muted-foreground: #57544e;
+  --accent: #efede6;
+  --accent-foreground: #0b0b0b;
+  --border: #d8d5ce;
+  --input: #d8d5ce;
+  --ring: #0b0b0b;
+
+  /* Tipografia: didone para el display, grotesca para la interfaz. */
   --font-dirtylane: var(--font-cu-display);
   --font-archivo: var(--font-cu-ui);
 
-  /* Marcos: el ambar es la luz que rebota del LED, y el bisel lleva el
-     detalle del corchete del logo. */
-  --frame-negro: #14171a;
-  --frame-aluminio: #6e747a;
-  --frame-madera: #7a5a34;
-  --frame-hl-negro: rgba(224, 163, 60, 0.16);
-  --frame-hl-aluminio: rgba(224, 163, 60, 0.28);
-  --frame-hl-madera: rgba(224, 163, 60, 0.22);
-  --frame-depth: rgba(0, 0, 0, 0.7);
-  --frame-bisel: rgba(224, 163, 60, 0.55);
-  --frame-mat-blanco: #eae8e3;
-  --frame-mat-negro: #0c0e10;
-  --frame-mat-arena: #ded5c4;
-  --frame-glow: rgba(224, 163, 60, 0.3);
+  /* Marcos: monocromo, con sombra corta de papel, sin brillo de color. */
+  --frame-negro: #111111;
+  --frame-aluminio: #c7c4bc;
+  --frame-madera: #8b8779;
+  --frame-hl-negro: rgba(255, 255, 255, 0.16);
+  --frame-hl-aluminio: rgba(255, 255, 255, 0.55);
+  --frame-hl-madera: rgba(255, 255, 255, 0.3);
+  --frame-depth: rgba(11, 11, 11, 0.22);
+  --frame-bisel: rgba(255, 255, 255, 0.5);
+  --frame-mat-blanco: #ffffff;
+  --frame-mat-negro: #0b0b0b;
+  --frame-mat-arena: #e7e4dc;
+  --frame-glow: rgba(11, 11, 11, 0.12);
 }

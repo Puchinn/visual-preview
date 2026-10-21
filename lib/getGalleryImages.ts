@@ -6,9 +6,11 @@ export function getGalleryImages(folder: string) {
 
   const files = fs.readdirSync(folderPath);
 
-  const images = files.filter((file) =>
-    /\.(jpg|jpeg|png|gif|webp)$/i.test(file)
-  );
+  const images = files
+    .filter((file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
+    // readdirSync entrega orden alfabetico (1, 10, 11, 12, 2...). El
+    // orden natural mantiene la numeracion de las laminas.
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
   return images.map((name) => `/images/${folder}/${name}`);
 }
