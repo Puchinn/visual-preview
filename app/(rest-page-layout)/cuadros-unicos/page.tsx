@@ -3,7 +3,6 @@ import { CuadrosUnicosHero } from "@/components/sections/cuadros-unicos/hero";
 import { CuadrosUnicosTechniques } from "@/components/sections/cuadros-unicos/techniques";
 import { CuadrosUnicosGallery } from "@/components/sections/cuadros-unicos/gallery";
 import { CuadrosUnicosContact } from "@/components/sections/cuadros-unicos/contact";
-import { getGalleryImages } from "@/lib/getGalleryImages";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -21,13 +20,14 @@ export const metadata: Metadata = {
 };
 
 export default function CuadrosUnicosPage() {
-  const images = getGalleryImages("cuadros-unicos");
-
   return (
     <main className="bg-[var(--cu-paper)] text-[var(--cu-ink)]">
       <CuadrosUnicosHero />
       <CuadrosUnicosTechniques />
-      <CuadrosUnicosGallery images={images} />
+      <CuadrosUnicosGallery
+        pieces={siteConfig.cuadrosUnicos.pieces}
+        instagram={siteConfig.cuadrosUnicos.instagram}
+      />
       <CuadrosUnicosContact />
     </main>
   );

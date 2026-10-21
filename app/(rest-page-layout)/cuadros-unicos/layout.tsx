@@ -3,11 +3,16 @@
  *
  * La clase .cu-sub-brand redefine los tokens de color y de tipografia
  * (ver app/globals.css). Como las utilidades de Tailwind 4 compilan a
- * referencias a esas variables, todo el contenido de la pagina hereda la
- * estetica nueva sin tocar una sola clase.
+ * referencias a esas variables, todo el contenido de la pagina hereda el
+ * sistema blanco y negro sin tocar una sola clase.
  *
- * El header y el footer propios tambien llevan la clase, porque viven en
- * el layout padre (fuera de este contenedor) y necesitan los mismos tokens.
+ * El header es el original de Visual Design y vive fuera de este contenedor.
+ * El footer propio tambien lleva la clase, porque vive en el layout padre.
+ *
+ * El <style> es una excepcion deliberada: Tailwind descarta la regla :has
+ * al compilar, y necesitamos que el header original deje de ser sticky solo
+ * en esta ruta para que el logo de Visual Design no tape las piezas. La
+ * regla se inyecta unicamente en /cuadros-unicos.
  */
 export default function CuadrosUnicosLayout({
   children,
@@ -15,8 +20,16 @@ export default function CuadrosUnicosLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="cu-sub-brand font-cu-ui bg-[var(--cu-paper)] text-[var(--cu-ink)]">
-      {children}
-    </div>
+    <>
+      <style
+        dangerouslySetInnerHTML={{
+          __html:
+            "body:has(.cu-sub-brand) .site-header{position:relative}",
+        }}
+      />
+      <div className="cu-sub-brand bg-[var(--cu-paper)] font-cu-sans text-[var(--cu-ink)] antialiased selection:bg-[var(--cu-ink)] selection:text-[var(--cu-paper)]">
+        {children}
+      </div>
+    </>
   );
 }

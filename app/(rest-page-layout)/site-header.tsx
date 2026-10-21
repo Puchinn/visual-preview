@@ -1,31 +1,17 @@
-"use client";
-
-import { usePathname } from "next/navigation";
 import { Navbar } from "./navbar";
-import { CuNavbar } from "@/components/layout/cu-navbar";
-import { cn } from "@/lib/utils";
 
 /**
- * Cabecera del sitio.
+ * Cabecera original del sitio.
  *
- * En /cuadros-unicos la cabecera es de la submarca: papel, filete y el
- * wordmark de CUADROS UNICOS, sin el logo ni el menu de Visual Design.
- * El resto del sitio conserva la barra blanca de siempre.
+ * La misma barra, el mismo menú y el mismo logo de Visual Design en todas
+ * las rutas, incluida /cuadros-unicos. La posición se resuelve por CSS:
+ * en la página de la submarca el header deja de ser sticky para que el
+ * logo, que sobresale por debajo de la barra, no tape las piezas al
+ * scrollear (ver cuadros-unicos/layout.tsx).
  */
 export function SiteHeader() {
-  const pathname = usePathname();
-  const isSubBrand = pathname === "/cuadros-unicos";
-
-  if (isSubBrand) {
-    return (
-      <header className="cu-sub-brand sticky top-0 z-50 w-full border-b border-[var(--cu-rule)] bg-[var(--cu-paper)] font-cu-ui">
-        <CuNavbar />
-      </header>
-    );
-  }
-
   return (
-    <header className={cn("w-full sticky top-0 z-50 text-black bg-white shadow")}>
+    <header className="site-header w-full sticky top-0 z-50 bg-white text-black shadow">
       <Navbar variant="light" />
     </header>
   );

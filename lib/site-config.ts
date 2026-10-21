@@ -65,6 +65,56 @@ export const siteConfig = {
           "Horizontal, vertical o cuadrado, con el tamaño que pida el lugar donde va. Vos elegís la imagen; nosotros la medimos.",
       },
     ],
+    /**
+     * Piezas reales del taller, en formato vertical 3:4. Se procesaron a
+     * blanco y negro para la propuesta (los originales están en `recursos/`).
+     * Para actualizar la vidriera, reemplazar los archivos de
+     * `public/images/cuadros-unicos/piezas/` y esta lista.
+     */
+    hero: {
+      src: "/images/cuadros-unicos/piezas/acdc.webp",
+      title: "AC/DC",
+      technique: "LED",
+      alt: "Pieza de AC/DC con el logo y el retrato iluminados por LED, apoyada en el taller",
+    },
+    pieces: [
+      {
+        src: "/images/cuadros-unicos/piezas/sonic.webp",
+        title: "Sonic",
+        technique: "LED",
+        alt: "Pieza de Sonic con el contorno iluminado por LED, apoyada en el taller",
+      },
+      {
+        src: "/images/cuadros-unicos/piezas/messi-10.webp",
+        title: "Messi",
+        technique: "LED",
+        alt: "Pieza de Messi de espaldas con el número 10 iluminado, sobre una mesa de madera",
+      },
+      {
+        src: "/images/cuadros-unicos/piezas/jack-daniels-1.webp",
+        title: "Jack Daniel's",
+        technique: "Resina",
+        alt: "Pieza de Jack Daniel's con botella y relieve, iluminada sobre una mesa",
+      },
+      {
+        src: "/images/cuadros-unicos/piezas/messi-legend.webp",
+        title: "Messi",
+        technique: "LED",
+        alt: "Detalle de la pieza de Messi con el contorno LED encendido",
+      },
+      {
+        src: "/images/cuadros-unicos/piezas/acdc-2.webp",
+        title: "AC/DC",
+        technique: "LED",
+        alt: "Pieza de AC/DC inclinada con el logo LED encendido",
+      },
+      {
+        src: "/images/cuadros-unicos/piezas/jack-daniels-2.webp",
+        title: "Jack Daniel's",
+        technique: "Resina",
+        alt: "Segunda vista de la pieza de Jack Daniel's con la botella en relieve",
+      },
+    ],
   },
   pages: {
     home: {

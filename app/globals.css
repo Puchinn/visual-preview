@@ -67,8 +67,8 @@
 @theme inline {
   --font-archivo: var(--font-archivo);
   --font-dirtylane: var(--font-dirtylane);
-  --font-cu-display: var(--font-cu-display);
-  --font-cu-ui: var(--font-cu-ui);
+  --font-cu-sans: var(--font-geist-sans);
+  --font-cu-mono: var(--font-geist-mono);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
@@ -266,7 +266,7 @@
 }
 
 /* ---------------------------------------------------------------------------
-   CUADROS UNICOS — estética "papel y tinta".
+   CUADROS UNICOS — sistema blanco y negro.
 
    El sitio tiene un solo tema, con tokens en :root. Tailwind 4 compila las
    utilidades a referencias a variables crudas (.text-primary compila a
@@ -275,60 +275,47 @@
    clase. Eso es lo que permite que /cuadros-unicos se vea distinto sin
    tocar el resto del sitio.
 
-   La clase se aplica en la página, el header propio y el footer propio
-   (ver site-header.tsx y footer.tsx).
+   La clase se aplica en la página y en el footer propio. El header es el
+   original de Visual Design: misma barra, mismo menú y mismo logo.
    --------------------------------------------------------------------------- */
 .cu-sub-brand {
-  /* Papel y tinta: una sola tinta sobre papel, sin color de acento.
-     La escala de grises mantiene la semantica del sitio
-     (1 = texto principal, 4 = fondo). */
-  --cu-paper: #f7f6f2;
+  /* Neutros puros: blanco de papel, tinta casi negra y grises de sistema.
+     El negro es el único acento. */
+  --cu-paper: #ffffff;
   --cu-white: #ffffff;
-  --cu-ink: #0b0b0b;
-  --cu-ink-soft: #57544e;
-  --cu-rule: #d8d5ce;
+  --cu-ink: #0a0a0a;
+  --cu-ink-soft: #6a6a6a;
+  --cu-rule: #e4e4e4;
+  --cu-gray: #f2f2f2;
+  --cu-gray-dark: #161616;
 
-  --primary: #0b0b0b;
-  --primary-light: #0b0b0b;
-  --gray-tone-1: #0b0b0b;
-  --gray-tone-2: #57544e;
-  --gray-tone-3: #efede6;
-  --gray-tone-4: #f7f6f2;
+  --primary: #0a0a0a;
+  --primary-light: #0a0a0a;
+  --gray-tone-1: #0a0a0a;
+  --gray-tone-2: #6a6a6a;
+  --gray-tone-3: #f2f2f2;
+  --gray-tone-4: #ffffff;
 
   /* Tokens de shadcn/ui, para que los componentes compartidos (botones,
-     dialogos, sheet) respondan al papel sin retocar cada clase. */
-  --background: #f7f6f2;
-  --foreground: #0b0b0b;
+     dialogos, sheet) respondan al sistema sin retocar cada clase. */
+  --background: #ffffff;
+  --foreground: #0a0a0a;
   --card: #ffffff;
-  --card-foreground: #0b0b0b;
+  --card-foreground: #0a0a0a;
   --popover: #ffffff;
-  --popover-foreground: #0b0b0b;
-  --primary-foreground: #f7f6f2;
-  --secondary: #efede6;
-  --secondary-foreground: #0b0b0b;
-  --muted: #efede6;
-  --muted-foreground: #57544e;
-  --accent: #efede6;
-  --accent-foreground: #0b0b0b;
-  --border: #d8d5ce;
-  --input: #d8d5ce;
-  --ring: #0b0b0b;
+  --popover-foreground: #0a0a0a;
+  --primary-foreground: #ffffff;
+  --secondary: #f2f2f2;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f2f2f2;
+  --muted-foreground: #6a6a6a;
+  --accent: #f2f2f2;
+  --accent-foreground: #0a0a0a;
+  --border: #e4e4e4;
+  --input: #e4e4e4;
+  --ring: #0a0a0a;
 
-  /* Tipografia: didone para el display, grotesca para la interfaz. */
-  --font-dirtylane: var(--font-cu-display);
-  --font-archivo: var(--font-cu-ui);
-
-  /* Marcos: monocromo, con sombra corta de papel, sin brillo de color. */
-  --frame-negro: #111111;
-  --frame-aluminio: #c7c4bc;
-  --frame-madera: #8b8779;
-  --frame-hl-negro: rgba(255, 255, 255, 0.16);
-  --frame-hl-aluminio: rgba(255, 255, 255, 0.55);
-  --frame-hl-madera: rgba(255, 255, 255, 0.3);
-  --frame-depth: rgba(11, 11, 11, 0.22);
-  --frame-bisel: rgba(255, 255, 255, 0.5);
-  --frame-mat-blanco: #ffffff;
-  --frame-mat-negro: #0b0b0b;
-  --frame-mat-arena: #e7e4dc;
-  --frame-glow: rgba(11, 11, 11, 0.12);
+  /* Tipografia: Geist para el sistema, Geist Mono para los datos. */
+  --font-dirtylane: var(--font-geist-sans);
+  --font-archivo: var(--font-geist-sans);
 }

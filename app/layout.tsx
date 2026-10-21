@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Bodoni_Moda, Hanken_Grotesk } from "next/font/google";
+import { Archivo, Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
@@ -17,20 +17,16 @@ const dirtyLane = localFont({
 
 /* Tipografías de la submarca CUADROS UNICOS. Se cargan siempre (0 requests
    extra: next/font las sirve desde el build) y solo se activan dentro de
-   .cu-sub-brand, que redefine --font-dirtylane y --font-archivo.
-   Papel y tinta: una didone de alto contraste para el display y una grotesca
-   neutra para la interfaz. */
-const bodoniModa = Bodoni_Moda({
-  variable: "--font-cu-display",
+   .cu-sub-brand. Geist para todo el sistema y Geist Mono para los datos
+   técnicos (índices, epígrafes, medidas). */
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
 });
 
-const hankenGrotesk = Hanken_Grotesk({
-  variable: "--font-cu-ui",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
 });
 
 import { IntroProvider } from "@/components/providers/intro-provider";
@@ -83,7 +79,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${archivo.className} ${dirtyLane.variable} ${bodoniModa.variable} ${hankenGrotesk.variable} bg-black`}
+        className={`${archivo.className} ${dirtyLane.variable} ${geistSans.variable} ${geistMono.variable} bg-black`}
       >
         <noscript>
           <iframe
