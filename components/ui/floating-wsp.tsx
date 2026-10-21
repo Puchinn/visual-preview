@@ -1,13 +1,30 @@
-import { siteConfig } from "@/lib/site-config";
+"use client";
+
+import { useIntent } from "@/components/providers/intent-provider";
+import { siteConfig, type SiteIntent } from "@/lib/site-config";
+
+const TOOLTIPS: Record<SiteIntent, string> = {
+  grafica: "Consultanos por tu trabajo de gráfica",
+  cuadros: "Consultanos por tu cuadro",
+};
 
 export function FloatingWsp() {
+  const { intent } = useIntent();
+
+  // Sin intención declarada usamos el mensaje general.
+  const message = intent
+    ? siteConfig.links.whatsappMessages[intent]
+    : siteConfig.links.whatsappMessages.general;
+  const href = `${siteConfig.links.whatsapp}?text=${encodeURIComponent(message)}`;
+  const tooltip = intent ? TOOLTIPS[intent] : "Chatea con nosotros";
+
   return (
     <div className="group">
       <div className="relative">
         {/* Tooltip */}
-        <div className="absolute translate-y-96 group-hover:translate-y-0 bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100">
+        <div className="absolute translate-y-96 group-hover:translate-y-0 bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <div className="bg-foreground text-background px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap shadow-lg">
-            Chatea con nosotros
+            {tooltip}
             <div className="absolute top-full right-4 -mt-1">
               <div className="border-8 border-transparent border-t-foreground" />
             </div>
@@ -16,11 +33,11 @@ export function FloatingWsp() {
 
         {/* Botón flotante */}
         <a
-          href={siteConfig.links.whatsapp}
+          href={href}
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-full flex items-center justify-center h-[65px] md:h-[80px] w-[65px] md:w-[80px] bg-[#25D366] hover:bg-[#20BA5A] hover:scale-[120%] transition-all duration-200 shadow-lg hover:shadow-xl"
-          aria-label="Contactar por WhatsApp"
+          aria-label={tooltip}
         >
           <svg
             className="w-[36px] h-[36px] text-white"

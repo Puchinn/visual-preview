@@ -11,6 +11,7 @@ import {
   InstagramIcon,
   FacebookIcon,
   ArrowRight,
+  Frame,
 } from "lucide-react";
 import { CustomLogo } from "../branding/custom-logo-animated/custom-logo";
 import { siteConfig } from "@/lib/site-config";
@@ -188,6 +189,50 @@ export function Footer() {
                       className="text-slate-300 hover:text-red-500 transition-colors text-sm"
                     >
                       Envíos a Domicilio
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Cuadros Unicos Column */}
+            <div className="col-span-1 flex">
+              <div>
+                <div className="flex items-center gap-2 mb-6">
+                  <Frame className="text-red-500" />
+                  <h3 className="text-lg font-bold text-white">
+                    {siteConfig.cuadrosUnicos.name.toUpperCase()}
+                  </h3>
+                </div>
+                <ul className="space-y-3">
+                  <li>
+                    <Link
+                      href={siteConfig.cuadrosUnicos.path}
+                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                    >
+                      Ver la submarca
+                    </Link>
+                  </li>
+                  <li>
+                    <a
+                      href={siteConfig.cuadrosUnicos.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                    >
+                      Instagram
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={`${siteConfig.links.whatsapp}?text=${encodeURIComponent(
+                        siteConfig.links.whatsappMessages.cuadros
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-300 hover:text-red-500 transition-colors text-sm"
+                    >
+                      Consultar por un cuadro
                     </a>
                   </li>
                 </ul>

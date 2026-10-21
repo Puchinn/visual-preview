@@ -19,9 +19,13 @@ export async function generateStaticParams() {
     return fs.statSync(path.join(imagesDir, file)).isDirectory();
   });
 
-  return dirs.map((dir) => ({
-    service: dir,
-  }));
+  // Solo los servicios declarados en siteConfig son páginas válidas.
+  // Carpetas como `cuadros-unicos` tienen su propia ruta y no son servicios.
+  return dirs
+    .filter((dir) => dir in siteConfig.pages.services)
+    .map((dir) => ({
+      service: dir,
+    }));
 }
 
 export async function generateMetadata({
@@ -53,6 +57,13 @@ export default async function Page({
   params: Promise<{ service: string }>;
 }) {
   const { service } = await params;
+
+  // Solo los servicios declarados en siteConfig tienen página. Cualquier otra
+  // carpeta en public/images/ (por ejemplo cuadros-unicos) tiene su propia
+  // ruta y no corresponde a /servicios/[service].
+  if (!(service in siteConfig.pages.services)) {
+    notFound();
+  }
 
   // Verify folder exists to handle 404s gracefully if dynamicParams is true
   // and someone navigates to a non-existent service

@@ -1,8 +1,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* El sitio define un solo tema (tokens claros en :root, fondo negro fijo).
+   Por defecto Tailwind 4 aplica las utilidades `dark:` según la preferencia del
+   sistema, lo que dejaba botones y campos con estilos que no corresponden.
+   Se ata la variante a la clase `.dark`, que el sitio nunca usa. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --primary: #c70000;
+  /* Variante legible sobre fondos oscuros: #c70000 sobre negro queda en 2.8:1. */
+  --primary-light: #ef4444;
   --gray-tone-1: #d9d9d9;
   --gray-tone-2: #8c8c8c;
   --gray-tone-3: #404040;
@@ -46,6 +54,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
   --color-gray-tone-1: var(--gray-tone-1);
   --color-gray-tone-2: var(--gray-tone-2);
   --color-gray-tone-3: var(--gray-tone-3);

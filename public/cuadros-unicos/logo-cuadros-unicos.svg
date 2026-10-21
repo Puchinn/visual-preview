@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 100" fill="none" role="img" aria-label="Cuadros Unicos">
+  <title>Cuadros Unicos</title>
+  <!-- Capas del cuadro en axonometría: marco, paspartú, resina, imagen -->
+  <rect x="20" y="17" width="100" height="68" stroke="#ffffff" stroke-opacity="0.22" stroke-width="2" />
+  <rect x="16" y="13.5" width="100" height="68" stroke="#ffffff" stroke-opacity="0.45" stroke-width="2.5" />
+  <rect x="12" y="10" width="100" height="68" stroke="#ffffff" stroke-width="4" />
+  <!-- Imagen: horizonte con sol -->
+  <path d="M22 68 L52 40 L72 58 L88 44 L102 68 Z" fill="#ffffff" fill-opacity="0.9" />
+  <circle cx="40" cy="30" r="8" fill="#c70000" />
+  <!-- Rótulo de galería -->
+  <rect x="112" y="72" width="18" height="6" fill="#c70000" />
+</svg>

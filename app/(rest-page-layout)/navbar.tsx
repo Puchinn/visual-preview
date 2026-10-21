@@ -31,11 +31,22 @@ import {
 } from "@/components/ui/tooltip";
 
 import { Button } from "@/components/ui/button";
+import { NavItem, useActiveNav } from "@/components/layout/nav-item";
+import { useIntent } from "@/components/providers/intent-provider";
+import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site-config";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const isActive = useActiveNav();
+  const { intent } = useIntent();
+
+  const whatsappHref = `${siteConfig.links.whatsapp}?text=${encodeURIComponent(
+    intent
+      ? siteConfig.links.whatsappMessages[intent]
+      : siteConfig.links.whatsappMessages.general
+  )}`;
 
   const services = Object.values(siteConfig.pages.services).map((service) => ({
     label: service.content_title,
@@ -71,14 +82,31 @@ export function Navbar() {
                 <NavigationMenu>
                   <NavigationMenuList className="gap-x-10 text-black">
                     <NavigationMenuItem>
-                      <NavigationMenuItem>
-                        <Link href={"/"}>INICIO</Link>
-                      </NavigationMenuItem>
+                      <NavItem
+                        href="/"
+                        variant="light"
+                        active={isActive("/")}
+                      >
+                        INICIO
+                      </NavItem>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                      <NavigationMenuItem>
-                        <Link href={"/#nosotros"}>NOSOTROS</Link>
-                      </NavigationMenuItem>
+                      <NavItem
+                        href="/#nosotros"
+                        variant="light"
+                        active={isActive("/#nosotros")}
+                      >
+                        NOSOTROS
+                      </NavItem>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                      <NavItem
+                        href={siteConfig.cuadrosUnicos.path}
+                        variant="light"
+                        active={isActive(siteConfig.cuadrosUnicos.path)}
+                      >
+                        CUADROS UNICOS
+                      </NavItem>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                       <NavigationMenuTrigger className="bg-transparent text-base p-0 m-0 text-black">
@@ -104,7 +132,13 @@ export function Navbar() {
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                      <Link href={"/contacto"}>CONTACTO</Link>
+                      <NavItem
+                        href="/contacto"
+                        variant="light"
+                        active={isActive("/contacto")}
+                      >
+                        CONTACTO
+                      </NavItem>
                     </NavigationMenuItem>
                   </NavigationMenuList>
                 </NavigationMenu>
@@ -169,7 +203,7 @@ export function Navbar() {
                     variant="outline"
                   >
                     <a
-                      href="https://wa.me/5491173593738"
+                      href={whatsappHref}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -207,19 +241,38 @@ export function Navbar() {
                   <div className="flex-1">
                     {/* INICIO */}
                     <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
-                      <Link href="/" className="font-bold  tracking-wide">
+                      <NavItem
+                        href="/"
+                        variant="dark"
+                        active={isActive("/")}
+                        className="font-bold tracking-wide"
+                      >
                         INICIO
-                      </Link>
+                      </NavItem>
                     </div>
 
                     {/* NOSOTROS */}
                     <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
-                      <Link
+                      <NavItem
                         href="/#nosotros"
+                        variant="dark"
+                        active={isActive("/#nosotros")}
                         className="font-bold tracking-wide"
                       >
                         NOSOTROS
-                      </Link>
+                      </NavItem>
+                    </div>
+
+                    {/* CUADROS UNICOS */}
+                    <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
+                      <NavItem
+                        href={siteConfig.cuadrosUnicos.path}
+                        variant="dark"
+                        active={isActive(siteConfig.cuadrosUnicos.path)}
+                        className="font-bold tracking-wide"
+                      >
+                        CUADROS UNICOS
+                      </NavItem>
                     </div>
 
                     {/* SERVICIOS */}
@@ -228,7 +281,14 @@ export function Navbar() {
                         onClick={() => setIsServicesOpen(!isServicesOpen)}
                         className="w-full flex items-center justify-between px-6 py-4 hover:bg-gray-900 transition"
                       >
-                        <h3 className="font-bold tracking-wide">SERVICIOS</h3>
+                        <h3
+                          className={cn(
+                            "font-bold tracking-wide",
+                            isActive("/servicios") && "text-primary-light"
+                          )}
+                        >
+                          SERVICIOS
+                        </h3>
                         <ChevronUp
                           size={24}
                           className={`transition-transform ${
@@ -244,7 +304,15 @@ export function Navbar() {
                             <Link
                               href={service.link}
                               key={index}
-                              className="text-gray-300 block hover:text-white cursor-pointer transition"
+                              aria-current={
+                                isActive(service.link) ? "page" : undefined
+                              }
+                              className={cn(
+                                "block cursor-pointer transition",
+                                isActive(service.link)
+                                  ? "text-primary-light"
+                                  : "text-gray-300 hover:text-white"
+                              )}
                             >
                               {service.label}
                             </Link>
@@ -255,12 +323,14 @@ export function Navbar() {
 
                     {/* CONTACTO */}
                     <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
-                      <Link
-                        href={"/contacto"}
+                      <NavItem
+                        href="/contacto"
+                        variant="dark"
+                        active={isActive("/contacto")}
                         className="font-bold tracking-wide"
                       >
                         CONTACTO
-                      </Link>
+                      </NavItem>
                     </div>
                   </div>
 

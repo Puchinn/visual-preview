@@ -8,6 +8,8 @@ import { FaqSection } from "@/components/sections/faqs-section";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/responsive-navbar/navbar";
 import { InitialAnimation } from "@/components/initial-animation";
+import { WelcomeModal } from "@/components/sections/welcome-modal";
+import { CuadrosUnicosBanner } from "@/components/sections/cuadros-unicos-banner";
 import { FloatingButtons } from "@/components/ui/floating-buttons";
 import { CarouselLastProjects } from "@/components/ui/carousel-last-projects";
 
@@ -19,6 +21,7 @@ export default function Home() {
         Design
       </h1>
       <InitialAnimation />
+      <WelcomeModal />
       <div className="relative">
         <FadeBackground />
         <Navbar />
@@ -30,6 +33,7 @@ export default function Home() {
       </div>
       <Experience />
       <Services />
+      <CuadrosUnicosBanner />
       <CarouselLastProjects />
       <Clients />
       <FaqSection />

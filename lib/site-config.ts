@@ -8,7 +8,61 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/VisualDesignPage/",
     instagram: "https://www.instagram.com/visualgrafica1996",
     mail: "mailto:info@visuald.com.ar",
-    whatsapp: "https://wa.me/5491154990028",
+    whatsapp: "https://wa.me/5491173593738",
+    /**
+     * Mensajes pre-cargados de WhatsApp. El `intent` lo elige el visitante en el
+     * modal de bienvenida y se conserva en localStorage, así cada consulta
+     * llega al WhatsApp con el texto correspondiente al motivo de la visita.
+     */
+    whatsappMessages: {
+      general:
+        "Hola! Te escribo desde la web de Visual Design. Me gustaría recibir más información.",
+      grafica:
+        "Hola! Te escribo desde la web de Visual Design. Necesito un presupuesto para un trabajo de gráfica (cartelería, vinilos, banners, montados, corpóreos, etc.). ¿Me pueden pasar las opciones y los valores?",
+      cuadros:
+        "Hola! Te escribo desde la web de Visual Design. Me interesa CUADROS UNICOS. Quisiera saber más sobre los cuadros personalizados (resina, LED, marcos a medida) y cómo sacar el mío.",
+    },
+  },
+  /**
+   * CUADROS UNICOS — submarca de Visual Design.
+   * Comparte paleta y tipografías con la marca madre; se diferencia por el
+   * tratamiento (motivo de marco) y por tener navegación propia.
+   */
+  cuadrosUnicos: {
+    name: "Cuadros Unicos",
+    tagline: "Tu imagen, convertida en un cuadro para mirar todos los días",
+    description:
+      "Cuadros personalizados con resina, iluminación LED y marcos a medida. Elegís la imagen, el material y el formato, y armamos la pieza con el mismo cuidado con el que imprimimos un cartel.",
+    path: "/cuadros-unicos",
+    // TODO: reemplazar por el Instagram real de CUADROS UNICOS
+    instagram: "https://www.instagram.com/cuadrosunicos",
+    logo: "/cuadros-unicos/logo-cuadros-unicos.svg",
+    techniques: [
+      {
+        slug: "resina",
+        name: "Resina",
+        description:
+          "Tu imagen encapsulada en resina epóxica, con profundidad y brillo cristalino. Ningún ángulo se ve igual.",
+      },
+      {
+        slug: "led",
+        name: "LED",
+        description:
+          "Backlight LED que ilumina la imagen desde atrás, con luz uniforme y sin reflejos sobre el frente.",
+      },
+      {
+        slug: "marcos",
+        name: "Marcos",
+        description:
+          "Marcos de madera, aluminio anodizado o negro mate, armados a medida para que encajen en la pared donde va.",
+      },
+      {
+        slug: "medida",
+        name: "A medida",
+        description:
+          "Formatos, orientaciones y tamaños libres. Horizontal, vertical o cuadrado, con la imagen que vos quieras.",
+      },
+    ],
   },
   pages: {
     home: {
@@ -66,3 +120,8 @@ export const siteConfig = {
 };
 
 export type SiteConfig = typeof siteConfig;
+
+/** Motivo declarado por el visitante en el modal de bienvenida. */
+export type SiteIntent = "grafica" | "cuadros";
+
+export const INTENT_KEY = "visuald-intent";

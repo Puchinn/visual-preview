@@ -16,6 +16,7 @@ const dirtyLane = localFont({
 });
 
 import { IntroProvider } from "@/components/providers/intro-provider";
+import { IntentProvider } from "@/components/providers/intent-provider";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -72,7 +73,9 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <IntroProvider>{children}</IntroProvider>
+        <IntroProvider>
+          <IntentProvider>{children}</IntentProvider>
+        </IntroProvider>
       </body>
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-L31BQ35J30" />
       <Script id="google-analytics" strategy="afterInteractive">
