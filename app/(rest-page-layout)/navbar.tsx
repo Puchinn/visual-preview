@@ -60,7 +60,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
   return (
     <div
       className={cn(
-        "font-archivo relative lg:py-5 w-full top-0 max-w-[1400px] z-50 mx-auto",
+        "site-navbar font-archivo relative lg:py-5 w-full top-0 max-w-[1400px] z-50 mx-auto",
         isDark && "font-cu-ui"
       )}
     >
@@ -72,16 +72,31 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
               {/* Logo */}
               <div className="w-[160px]">
                 <Link
-                  className="hidden absolute top-0 lg:block"
+                  className="site-nav-logo-link-vd hidden absolute top-0 lg:block"
                   aria-description="logo"
                   href="/"
                 >
                   <Image
                     width={140}
                     height={140}
-                    className="bg-white rounded-full"
+                    className="site-nav-logo-vd bg-white rounded-full"
                     src="/logo-rojo-cambiado.svg"
-                    alt="Logo"
+                    alt="Visual Design"
+                  />
+                </Link>
+                {/* En /cuadros-unicos el CSS de la ruta oculta el logo de VD
+                    y muestra este, que lleva a la home de la submarca. */}
+                <Link
+                  className="site-nav-logo-link-cu absolute top-0 hidden"
+                  aria-label="Cuadros Únicos — inicio"
+                  href={siteConfig.cuadrosUnicos.path}
+                >
+                  <Image
+                    width={592}
+                    height={517}
+                    className="site-nav-logo-cu mt-1 hidden h-auto w-[112px]"
+                    src={siteConfig.cuadrosUnicos.logoOscuro}
+                    alt="Cuadros Únicos"
                   />
                 </Link>
               </div>
@@ -238,7 +253,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                 <li className="ml-2">
                   <Button
                     className={cn(
-                      "border-none rounded-sm text-base",
+                      "site-nav-cta border-none rounded-sm text-base",
                       isDark
                         ? "bg-primary font-medium text-gray-tone-4 hover:bg-[#eeb34a]"
                         : "bg-primary font-semibold text-white"
@@ -262,7 +277,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
             </div>
 
             {/* Mobile Menu */}
-            <div className="shadow lg:hidden py-5 relative">
+            <div className="site-nav-mobile-bar shadow lg:hidden py-5 relative">
               <div
                 className={cn(
                   "absolute z-10 inset-0",
@@ -274,12 +289,19 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                   width={135}
                   height={135}
                   className={cn(
-                    "mx-auto bg-white rounded-full",
+                    "site-nav-logo-vd mx-auto bg-white rounded-full",
                     // En la submarca el header es oscuro y chico: el logo
                     // grande de 135px tapa el hero.
                     isDark && "h-16 w-16"
                   )}
-                  alt="Logo"
+                  alt="Visual Design"
+                />
+                <Image
+                  src={siteConfig.cuadrosUnicos.logoOscuro}
+                  width={592}
+                  height={517}
+                  className="site-nav-logo-cu site-nav-mobile-logo-cu mt-1 hidden h-14 w-auto"
+                  alt="Cuadros Únicos"
                 />
               </div>
               <SheetTrigger className="z-20 relative" asChild>
@@ -295,7 +317,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                   {isOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
               </SheetTrigger>
-              <SheetContent className="">
+              <SheetContent className="site-nav-sheet">
                 <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
                 <nav
                   className={cn(
@@ -431,7 +453,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                     <a
                       href="tel:+541143829100"
                       className={cn(
-                        "block w-full text-white font-bold py-3 px-4 text-center rounded transition",
+                        "site-nav-phone block w-full text-white font-bold py-3 px-4 text-center rounded transition",
                         isDark
                           ? "bg-primary hover:bg-[#eeb34a] hover:text-gray-tone-4"
                           : "bg-red-600 hover:bg-red-700"
