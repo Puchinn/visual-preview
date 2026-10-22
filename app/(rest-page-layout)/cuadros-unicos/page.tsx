@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CuadrosUnicosHero } from "@/components/sections/cuadros-unicos/hero";
 import { CuadrosUnicosTechniques } from "@/components/sections/cuadros-unicos/techniques";
 import { CuadrosUnicosGallery } from "@/components/sections/cuadros-unicos/gallery";
+import { CuadrosUnicosReels } from "@/components/sections/cuadros-unicos/reels";
 import { CuadrosUnicosContact } from "@/components/sections/cuadros-unicos/contact";
 import { siteConfig } from "@/lib/site-config";
 
@@ -26,6 +27,10 @@ export default function CuadrosUnicosPage() {
       <CuadrosUnicosTechniques />
       <CuadrosUnicosGallery
         pieces={siteConfig.cuadrosUnicos.pieces}
+        instagram={siteConfig.cuadrosUnicos.instagram}
+      />
+      <CuadrosUnicosReels
+        reels={siteConfig.cuadrosUnicos.reels}
         instagram={siteConfig.cuadrosUnicos.instagram}
       />
       <CuadrosUnicosContact />

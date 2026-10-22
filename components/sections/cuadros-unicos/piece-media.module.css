@@ -1,0 +1,50 @@
+/* ---------------------------------------------------------------------------
+   Vidriera en color — pieza + halo de luz (piece-media.tsx).
+
+   La foto a color y, detrás, una copia desenfocada y pequeña que hace de
+   luz LED derramada. Todo estático: la luz queda siempre encendida.
+   --------------------------------------------------------------------------- */
+
+/* Capa 0: el halo. Se pide en un tamaño chico (el blur se come el detalle). */
+.glow {
+  object-fit: cover;
+  z-index: 0;
+  transform: scale(1.02);
+  filter: blur(34px) saturate(1.7) brightness(1.05);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* El cuadro: recorta la foto sobre el negro. */
+.led {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  background: #000;
+}
+
+/* La foto a color, un poco más encendida que el original. */
+.image {
+  object-fit: cover;
+  filter: saturate(1.15) brightness(1.05);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hover: apenas se acerca, sin efectos de luz nuevos. */
+@media (hover: hover) {
+  :global(.group):hover .image {
+    transform: scale(1.025);
+  }
+}
+
+/* Teclado: mismo gesto al enfocar la pieza. */
+:global(.group):has(button:focus-visible) .image {
+  transform: scale(1.025);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transition: none;
+  }
+}

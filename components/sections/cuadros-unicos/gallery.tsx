@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, ArrowUpRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PieceMedia } from "./piece-media";
 
 type Piece = {
   src: string;
@@ -13,7 +14,7 @@ type Piece = {
 };
 
 /**
- * La vidriera como una pared negra: piezas reales en gris, epígrafes en
+ * La vidriera como una pared negra: piezas reales a color, epígrafes en
  * Geist Mono y una retícula de tres columnas con corrimientos verticales.
  * El visor amplía la pieza y permite recorrer la serie con las flechas.
  */
@@ -111,15 +112,11 @@ export function CuadrosUnicosGallery({
                 aria-label={`Ampliar ${piece.title} — ${piece.technique}`}
                 className="block w-full text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               >
-                <div className="relative aspect-[3/4] w-full overflow-hidden bg-white/5">
-                  <Image
-                    src={piece.src}
-                    alt={piece.alt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 30vw"
-                    className="object-cover grayscale opacity-95 transition-[transform,opacity] duration-700 ease-out group-hover:scale-[1.025] group-hover:opacity-100 motion-reduce:transform-none motion-reduce:transition-none"
-                  />
-                </div>
+                <PieceMedia
+                  src={piece.src}
+                  alt={piece.alt}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 30vw"
+                />
               </button>
 
               <figcaption className="mt-4 flex items-start justify-between gap-4 border-t border-white/15 pt-3">
@@ -178,7 +175,7 @@ export function CuadrosUnicosGallery({
               alt={current.alt}
               width={1200}
               height={1600}
-              className="h-auto max-h-full w-auto max-w-full object-contain grayscale"
+              className="h-auto max-h-full w-auto max-w-full object-contain"
             />
           </div>
 

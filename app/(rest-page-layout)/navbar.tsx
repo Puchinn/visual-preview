@@ -22,7 +22,12 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 import {
   Tooltip,
@@ -31,7 +36,11 @@ import {
 } from "@/components/ui/tooltip";
 
 import { Button } from "@/components/ui/button";
-import { NavItem, useActiveNav, type NavVariant } from "@/components/layout/nav-item";
+import {
+  NavItem,
+  useActiveNav,
+  type NavVariant,
+} from "@/components/layout/nav-item";
 import { useIntent } from "@/components/providers/intent-provider";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site-config";
@@ -45,7 +54,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
   const whatsappHref = `${siteConfig.links.whatsapp}?text=${encodeURIComponent(
     intent
       ? siteConfig.links.whatsappMessages[intent]
-      : siteConfig.links.whatsappMessages.general
+      : siteConfig.links.whatsappMessages.general,
   )}`;
 
   const services = Object.values(siteConfig.pages.services).map((service) => ({
@@ -61,7 +70,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
     <div
       className={cn(
         "site-navbar font-archivo relative lg:py-5 w-full top-0 max-w-[1400px] z-50 mx-auto",
-        isDark && "font-cu-ui"
+        isDark && "font-cu-ui",
       )}
     >
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -94,7 +103,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                   <Image
                     width={592}
                     height={517}
-                    className="site-nav-logo-cu mt-1 hidden h-auto w-[112px]"
+                    className="site-nav-logo-cu mt-1 hidden h-auto bg-white w-[112px]"
                     src={siteConfig.cuadrosUnicos.logoOscuro}
                     alt="Cuadros Únicos"
                   />
@@ -107,7 +116,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                   <NavigationMenuList
                     className={cn(
                       "gap-x-10",
-                      isDark ? "text-white" : "text-black"
+                      isDark ? "text-white" : "text-black",
                     )}
                   >
                     <NavigationMenuItem>
@@ -141,7 +150,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                       <NavigationMenuTrigger
                         className={cn(
                           "bg-transparent text-base p-0 m-0",
-                          isDark ? "text-white" : "text-black"
+                          isDark ? "text-white" : "text-black",
                         )}
                       >
                         SERVICIOS
@@ -160,7 +169,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                                   </p>
                                 </Link>
                               </NavigationMenuLink>
-                            )
+                            ),
                           )}
                         </div>
                       </NavigationMenuContent>
@@ -186,7 +195,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                       "hover:scale-105 p-2 rounded-full border",
                       isDark
                         ? "text-white border-white/25 hover:text-primary"
-                        : "text-black"
+                        : "text-black",
                     )}
                   >
                     <Tooltip>
@@ -210,7 +219,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                       "hover:scale-105 p-2 rounded-full border",
                       isDark
                         ? "text-white border-white/25 hover:text-primary"
-                        : "text-black"
+                        : "text-black",
                     )}
                   >
                     <Tooltip>
@@ -234,7 +243,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                       "hover:scale-105 p-2 rounded-full border",
                       isDark
                         ? "text-white border-white/25 hover:text-primary"
-                        : "text-black"
+                        : "text-black",
                     )}
                   >
                     <Tooltip>
@@ -256,7 +265,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                       "site-nav-cta border-none rounded-sm text-base",
                       isDark
                         ? "bg-primary font-medium text-gray-tone-4 hover:bg-[#eeb34a]"
-                        : "bg-primary font-semibold text-white"
+                        : "bg-primary font-semibold text-white",
                     )}
                     asChild
                     size={"lg"}
@@ -281,7 +290,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
               <div
                 className={cn(
                   "absolute z-10 inset-0",
-                  isDark ? "bg-gray-tone-4" : "bg-white"
+                  isDark ? "bg-gray-tone-4" : "bg-white",
                 )}
               >
                 <Image
@@ -292,7 +301,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                     "site-nav-logo-vd mx-auto bg-white rounded-full",
                     // En la submarca el header es oscuro y chico: el logo
                     // grande de 135px tapa el hero.
-                    isDark && "h-16 w-16"
+                    isDark && "h-16 w-16",
                   )}
                   alt="Visual Design"
                 />
@@ -310,7 +319,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                     "px-3 transition-colors",
                     isDark
                       ? "text-white hover:text-primary"
-                      : "text-black hover:text-gray-300"
+                      : "text-black hover:text-gray-300",
                   )}
                   aria-label="Toggle menu"
                 >
@@ -322,7 +331,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                 <nav
                   className={cn(
                     "bg-black pt-10 text-sm text-white min-h-screen flex flex-col",
-                    isDark && "cu-sub-brand"
+                    isDark && "cu-sub-brand",
                   )}
                 >
                   {/* Menu Items */}
@@ -372,7 +381,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                         <h3
                           className={cn(
                             "font-bold tracking-wide",
-                            isActive("/servicios") && "text-primary-light"
+                            isActive("/servicios") && "text-primary-light",
                           )}
                         >
                           SERVICIOS
@@ -399,7 +408,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                                 "block cursor-pointer transition",
                                 isActive(service.link)
                                   ? "text-primary-light"
-                                  : "text-gray-300 hover:text-white"
+                                  : "text-gray-300 hover:text-white",
                               )}
                             >
                               {service.label}
@@ -456,7 +465,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                         "site-nav-phone block w-full text-white font-bold py-3 px-4 text-center rounded transition",
                         isDark
                           ? "bg-primary hover:bg-[#eeb34a] hover:text-gray-tone-4"
-                          : "bg-red-600 hover:bg-red-700"
+                          : "bg-red-600 hover:bg-red-700",
                       )}
                     >
                       TEL: (011) 4382 - 9100

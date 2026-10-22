@@ -22,7 +22,7 @@ export function CuadrosUnicosContact() {
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <p className="font-cu-mono text-[10px] uppercase tracking-[0.2em] text-[var(--cu-ink-soft)]">
-              04 / Contacto
+              05 / Contacto
             </p>
             <h2 className="mt-5 font-cu-sans text-[clamp(3rem,7vw,6rem)] font-medium leading-[0.88] tracking-[-0.06em] text-[var(--cu-ink)]">
               ¿Qué querés
@@ -53,7 +53,7 @@ export function CuadrosUnicosContact() {
                 className="inline-flex items-center gap-2 border border-[var(--cu-ink)]/20 px-6 py-4 text-sm font-medium text-[var(--cu-ink)] transition-colors hover:border-[var(--cu-ink)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cu-ink)]"
               >
                 <Instagram className="size-4" aria-hidden />
-                @cuadrosunicos
+                @cuadrosunicos_visual
               </a>
             </div>
 

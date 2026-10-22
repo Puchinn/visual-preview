@@ -36,7 +36,7 @@ export const siteConfig = {
       "Cuadros personalizados con resina, iluminación LED y marcos a medida. Elegís la imagen, el material y el formato, y armamos la pieza con el mismo cuidado con el que imprimimos un cartel.",
     path: "/cuadros-unicos",
     // TODO: reemplazar por el Instagram real de CUADROS UNICOS
-    instagram: "https://www.instagram.com/cuadrosunicos",
+    instagram: "https://www.instagram.com/cuadrosunicos_visual/",
     logo: "/cuadros-unicos/logo-cuadros-unicos-blanco.svg",
     logoOscuro: "/cuadros-unicos/logo-cuadros-unicos-negro.svg",
     techniques: [
@@ -66,10 +66,10 @@ export const siteConfig = {
       },
     ],
     /**
-     * Piezas reales del taller, en formato vertical 3:4. Se procesaron a
-     * blanco y negro para la propuesta (los originales están en `recursos/`).
-     * Para actualizar la vidriera, reemplazar los archivos de
-     * `public/images/cuadros-unicos/piezas/` y esta lista.
+     * Piezas reales del taller, en formato vertical 3:4. La vidriera usa la
+     * versión en color de `public/images/cuadros-unicos/piezas-color/`; las
+     * copias en gris de `piezas/` siguen para el hero y el banner de la home.
+     * Para actualizar la vidriera, reemplazar los archivos y esta lista.
      */
     hero: {
       src: "/images/cuadros-unicos/piezas/acdc.webp",
@@ -79,40 +79,88 @@ export const siteConfig = {
     },
     pieces: [
       {
-        src: "/images/cuadros-unicos/piezas/sonic.webp",
+        src: "/images/cuadros-unicos/piezas-color/sonic.webp",
         title: "Sonic",
         technique: "LED",
         alt: "Pieza de Sonic con el contorno iluminado por LED, apoyada en el taller",
       },
       {
-        src: "/images/cuadros-unicos/piezas/messi-10.webp",
+        src: "/images/cuadros-unicos/piezas-color/messi-10.webp",
         title: "Messi",
         technique: "LED",
         alt: "Pieza de Messi de espaldas con el número 10 iluminado, sobre una mesa de madera",
       },
       {
-        src: "/images/cuadros-unicos/piezas/jack-daniels-1.webp",
+        src: "/images/cuadros-unicos/piezas-color/jack-daniels-1.webp",
         title: "Jack Daniel's",
         technique: "Resina",
         alt: "Pieza de Jack Daniel's con botella y relieve, iluminada sobre una mesa",
       },
       {
-        src: "/images/cuadros-unicos/piezas/messi-legend.webp",
+        src: "/images/cuadros-unicos/piezas-color/messi-legend.webp",
         title: "Messi",
         technique: "LED",
         alt: "Detalle de la pieza de Messi con el contorno LED encendido",
       },
       {
-        src: "/images/cuadros-unicos/piezas/acdc-2.webp",
+        src: "/images/cuadros-unicos/piezas-color/acdc-2.webp",
         title: "AC/DC",
         technique: "LED",
         alt: "Pieza de AC/DC inclinada con el logo LED encendido",
       },
       {
-        src: "/images/cuadros-unicos/piezas/jack-daniels-2.webp",
+        src: "/images/cuadros-unicos/piezas-color/jack-daniels-2.webp",
         title: "Jack Daniel's",
         technique: "Resina",
         alt: "Segunda vista de la pieza de Jack Daniel's con la botella en relieve",
+      },
+    ],
+    /**
+     * Reels verticales del taller (9:16, 720x1280). Los editados viven en
+     * `recursos/reels-2026/` y `scripts/make-cuadros-reels.mjs` emite la
+     * versión liviana para la web más el poster. La `duration` es sólo para
+     * el epígrafe de la tira. Para pasar a CDN, cambiar `src` y `poster`.
+     */
+    reels: [
+      {
+        src: "/videos/cuadros-unicos/reel-01.mp4",
+        poster: "/images/cuadros-unicos/reels/reel-01.webp",
+        duration: "00:27",
+      },
+      {
+        src: "/videos/cuadros-unicos/reel-02.mp4",
+        poster: "/images/cuadros-unicos/reels/reel-02.webp",
+        duration: "00:23",
+      },
+      {
+        src: "/videos/cuadros-unicos/reel-03.mp4",
+        poster: "/images/cuadros-unicos/reels/reel-03.webp",
+        duration: "00:19",
+      },
+      {
+        src: "/videos/cuadros-unicos/reel-04.mp4",
+        poster: "/images/cuadros-unicos/reels/reel-04.webp",
+        duration: "00:14",
+      },
+      {
+        src: "/videos/cuadros-unicos/reel-05.mp4",
+        poster: "/images/cuadros-unicos/reels/reel-05.webp",
+        duration: "00:36",
+      },
+      {
+        src: "/videos/cuadros-unicos/reel-06.mp4",
+        poster: "/images/cuadros-unicos/reels/reel-06.webp",
+        duration: "00:31",
+      },
+      {
+        src: "/videos/cuadros-unicos/reel-07.mp4",
+        poster: "/images/cuadros-unicos/reels/reel-07.webp",
+        duration: "00:06",
+      },
+      {
+        src: "/videos/cuadros-unicos/reel-08.mp4",
+        poster: "/images/cuadros-unicos/reels/reel-08.webp",
+        duration: "00:10",
       },
     ],
   },

@@ -39,9 +39,9 @@ export function CuadrosUnicosHero() {
               <br />
               Un cuadro.
               <br />
-              Ninguna
+              Una pieza
               <br />
-              otra igual.
+              Unica.
             </h1>
 
             <p className="mt-9 max-w-md text-base leading-relaxed text-[var(--cu-ink-soft)] sm:text-lg">
@@ -105,7 +105,7 @@ export function CuadrosUnicosHero() {
                 className={cn(
                   "flex items-baseline justify-between gap-4 border-[var(--cu-rule)] py-5 pr-4",
                   index < 2 && "border-b md:border-b-0",
-                  "md:border-r md:px-6 md:last:border-r-0 md:last:pr-0 md:first:pl-0"
+                  "md:border-r md:px-6 md:last:border-r-0 md:last:pr-0 md:first:pl-0",
                 )}
               >
                 <div className="flex items-baseline gap-3">
