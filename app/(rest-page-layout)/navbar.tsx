@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import {
   Menu,
@@ -49,13 +50,23 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const isActive = useActiveNav();
+  const pathname = usePathname();
   const { intent } = useIntent();
+
+  // En la pagina de la submarca la barra queda solo con la marca, las redes,
+  // CONTACTO y el CTA de WhatsApp. INICIO, NOSOTROS y SERVICIOS son de Visual
+  // Design y ahi no aportan.
+  const isCuadrosUnicos = pathname === siteConfig.cuadrosUnicos.path;
 
   const whatsappHref = `${siteConfig.links.whatsapp}?text=${encodeURIComponent(
     intent
       ? siteConfig.links.whatsappMessages[intent]
       : siteConfig.links.whatsappMessages.general,
   )}`;
+
+  const instagramHref = isCuadrosUnicos
+    ? siteConfig.cuadrosUnicos.instagram
+    : siteConfig.links.instagram;
 
   const services = Object.values(siteConfig.pages.services).map((service) => ({
     label: service.content_title,
@@ -119,24 +130,39 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                       isDark ? "text-white" : "text-black",
                     )}
                   >
-                    <NavigationMenuItem>
-                      <NavItem
-                        href="/"
-                        variant={variant}
-                        active={isActive("/")}
-                      >
-                        INICIO
-                      </NavItem>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <NavItem
-                        href="/#nosotros"
-                        variant={variant}
-                        active={isActive("/#nosotros")}
-                      >
-                        NOSOTROS
-                      </NavItem>
-                    </NavigationMenuItem>
+                    {!isCuadrosUnicos && (
+                      <>
+                        <NavigationMenuItem>
+                          <NavItem
+                            href="/"
+                            variant={variant}
+                            active={isActive("/")}
+                          >
+                            INICIO
+                          </NavItem>
+                        </NavigationMenuItem>
+                        <NavigationMenuItem>
+                          <NavItem
+                            href="/#nosotros"
+                            variant={variant}
+                            active={isActive("/#nosotros")}
+                          >
+                            NOSOTROS
+                          </NavItem>
+                        </NavigationMenuItem>
+                      </>
+                    )}
+                    {isCuadrosUnicos && (
+                      <NavigationMenuItem>
+                        <NavItem
+                          href="/"
+                          variant={variant}
+                          active={isActive("/")}
+                        >
+                          VOLVER A VISUAL
+                        </NavItem>
+                      </NavigationMenuItem>
+                    )}
                     <NavigationMenuItem>
                       <NavItem
                         href={siteConfig.cuadrosUnicos.path}
@@ -146,34 +172,36 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                         CUADROS UNICOS
                       </NavItem>
                     </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger
-                        className={cn(
-                          "bg-transparent text-base p-0 m-0",
-                          isDark ? "text-white" : "text-black",
-                        )}
-                      >
-                        SERVICIOS
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <div className="grid gap-2 relative z-50 sm:w-[400px] md:grid-cols-2">
-                          {Object.values(siteConfig.pages.services).map(
-                            (service) => (
-                              <NavigationMenuLink asChild key={service.path}>
-                                <Link href={service.path}>
-                                  <div className="text-sm leading-none font-medium">
-                                    {service.content_title}
-                                  </div>
-                                  <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
-                                    {service.description}
-                                  </p>
-                                </Link>
-                              </NavigationMenuLink>
-                            ),
+                    {!isCuadrosUnicos && (
+                      <NavigationMenuItem>
+                        <NavigationMenuTrigger
+                          className={cn(
+                            "bg-transparent text-base p-0 m-0",
+                            isDark ? "text-white" : "text-black",
                           )}
-                        </div>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
+                        >
+                          SERVICIOS
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <div className="grid gap-2 relative z-50 sm:w-[400px] md:grid-cols-2">
+                            {Object.values(siteConfig.pages.services).map(
+                              (service) => (
+                                <NavigationMenuLink asChild key={service.path}>
+                                  <Link href={service.path}>
+                                    <div className="text-sm leading-none font-medium">
+                                      {service.content_title}
+                                    </div>
+                                    <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                                      {service.description}
+                                    </p>
+                                  </Link>
+                                </NavigationMenuLink>
+                              ),
+                            )}
+                          </div>
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    )}
                     <NavigationMenuItem>
                       <NavItem
                         href="/contacto"
@@ -190,6 +218,32 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
               {/* Desktop Social & CTA */}
               <ul className="hidden lg:flex items-center gap-2">
                 <div className="flex gap-1 items-center">
+                  {!isCuadrosUnicos && (
+                    <li
+                      className={cn(
+                        "hover:scale-105 p-2 rounded-full border",
+                        isDark
+                          ? "text-white border-white/25 hover:text-primary"
+                          : "text-black",
+                      )}
+                    >
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <a
+                            href={siteConfig.links.facebook}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <span className="sr-only">Siguenos en facebook</span>
+                            <FacebookIcon />
+                          </a>
+                        </TooltipTrigger>
+                        <TooltipContent side="bottom">
+                          <p className="text-base">Siguenos en facebook</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </li>
+                  )}
                   <li
                     className={cn(
                       "hover:scale-105 p-2 rounded-full border",
@@ -201,33 +255,9 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <a
-                          href="https://www.facebook.com/VisualDesignPage/"
                           target="_blank"
                           rel="noopener noreferrer"
-                        >
-                          <span className="sr-only">Siguenos en facebook</span>
-                          <FacebookIcon />
-                        </a>
-                      </TooltipTrigger>
-                      <TooltipContent side="bottom">
-                        <p className="text-base">Siguenos en facebook</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </li>
-                  <li
-                    className={cn(
-                      "hover:scale-105 p-2 rounded-full border",
-                      isDark
-                        ? "text-white border-white/25 hover:text-primary"
-                        : "text-black",
-                    )}
-                  >
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href={siteConfig.links.instagram}
+                          href={instagramHref}
                         >
                           <span className="sr-only">Siguenos en instagram</span>
                           <InstagramIcon />
@@ -238,26 +268,28 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                       </TooltipContent>
                     </Tooltip>
                   </li>
-                  <li
-                    className={cn(
-                      "hover:scale-105 p-2 rounded-full border",
-                      isDark
-                        ? "text-white border-white/25 hover:text-primary"
-                        : "text-black",
-                    )}
-                  >
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <a href="mailto:info@visuald.com.ar">
-                          <span className="sr-only">Envianos un mail</span>
-                          <Mail />
-                        </a>
-                      </TooltipTrigger>
-                      <TooltipContent side="bottom">
-                        <p className="text-base">Ponte en contacto</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </li>
+                  {!isCuadrosUnicos && (
+                    <li
+                      className={cn(
+                        "hover:scale-105 p-2 rounded-full border",
+                        isDark
+                          ? "text-white border-white/25 hover:text-primary"
+                          : "text-black",
+                      )}
+                    >
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <a href={siteConfig.links.mail}>
+                            <span className="sr-only">Envianos un mail</span>
+                            <Mail />
+                          </a>
+                        </TooltipTrigger>
+                        <TooltipContent side="bottom">
+                          <p className="text-base">Ponte en contacto</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </li>
+                  )}
                 </div>
                 <li className="ml-2">
                   <Button
@@ -276,7 +308,9 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Contactanos al WhatsApp{" "}
+                      {isCuadrosUnicos
+                        ? "Solicita tu cuadro"
+                        : "Contactanos al WhatsApp"}{" "}
                     </a>
                   </Button>
                 </li>
@@ -336,29 +370,32 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                 >
                   {/* Menu Items */}
                   <div className="flex-1">
-                    {/* INICIO */}
-                    <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
-                      <NavItem
-                        href="/"
-                        variant="dark"
-                        active={isActive("/")}
-                        className="font-bold tracking-wide"
-                      >
-                        INICIO
-                      </NavItem>
-                    </div>
+                    {/* INICIO y NOSOTROS: solo en el sitio principal */}
+                    {!isCuadrosUnicos && (
+                      <>
+                        <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
+                          <NavItem
+                            href="/"
+                            variant="dark"
+                            active={isActive("/")}
+                            className="font-bold tracking-wide"
+                          >
+                            INICIO
+                          </NavItem>
+                        </div>
 
-                    {/* NOSOTROS */}
-                    <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
-                      <NavItem
-                        href="/#nosotros"
-                        variant="dark"
-                        active={isActive("/#nosotros")}
-                        className="font-bold tracking-wide"
-                      >
-                        NOSOTROS
-                      </NavItem>
-                    </div>
+                        <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
+                          <NavItem
+                            href="/#nosotros"
+                            variant="dark"
+                            active={isActive("/#nosotros")}
+                            className="font-bold tracking-wide"
+                          >
+                            NOSOTROS
+                          </NavItem>
+                        </div>
+                      </>
+                    )}
 
                     {/* CUADROS UNICOS */}
                     <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
@@ -372,51 +409,67 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                       </NavItem>
                     </div>
 
-                    {/* SERVICIOS */}
-                    <div className="border-b border-gray-800">
-                      <button
-                        onClick={() => setIsServicesOpen(!isServicesOpen)}
-                        className="w-full flex items-center justify-between px-6 py-4 hover:bg-gray-900 transition"
-                      >
-                        <h3
-                          className={cn(
-                            "font-bold tracking-wide",
-                            isActive("/servicios") && "text-primary-light",
-                          )}
+                    {/* Vuelta al sitio principal */}
+                    {isCuadrosUnicos && (
+                      <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
+                        <NavItem
+                          href="/"
+                          variant="dark"
+                          active={isActive("/")}
+                          className="font-bold tracking-wide"
                         >
-                          SERVICIOS
-                        </h3>
-                        <ChevronUp
-                          size={24}
-                          className={`transition-transform ${
-                            isServicesOpen ? "rotate-0" : "rotate-180"
-                          }`}
-                        />
-                      </button>
+                          VOLVER A VISUAL
+                        </NavItem>
+                      </div>
+                    )}
 
-                      {/* Services Dropdown */}
-                      {isServicesOpen && (
-                        <div className="bg-black/90  font-bold text-base px-6 py-4 space-y-3 border-t border-gray-800">
-                          {services.map((service, index) => (
-                            <Link
-                              href={service.link}
-                              key={index}
-                              aria-current={
-                                isActive(service.link) ? "page" : undefined
-                              }
-                              className={cn(
-                                "block cursor-pointer transition",
-                                isActive(service.link)
-                                  ? "text-primary-light"
-                                  : "text-gray-300 hover:text-white",
-                              )}
-                            >
-                              {service.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                    {/* SERVICIOS: solo en el sitio principal */}
+                    {!isCuadrosUnicos && (
+                      <div className="border-b border-gray-800">
+                        <button
+                          onClick={() => setIsServicesOpen(!isServicesOpen)}
+                          className="w-full flex items-center justify-between px-6 py-4 hover:bg-gray-900 transition"
+                        >
+                          <h3
+                            className={cn(
+                              "font-bold tracking-wide",
+                              isActive("/servicios") && "text-primary-light",
+                            )}
+                          >
+                            SERVICIOS
+                          </h3>
+                          <ChevronUp
+                            size={24}
+                            className={`transition-transform ${
+                              isServicesOpen ? "rotate-0" : "rotate-180"
+                            }`}
+                          />
+                        </button>
+
+                        {/* Services Dropdown */}
+                        {isServicesOpen && (
+                          <div className="bg-black/90  font-bold text-base px-6 py-4 space-y-3 border-t border-gray-800">
+                            {services.map((service, index) => (
+                              <Link
+                                href={service.link}
+                                key={index}
+                                aria-current={
+                                  isActive(service.link) ? "page" : undefined
+                                }
+                                className={cn(
+                                  "block cursor-pointer transition",
+                                  isActive(service.link)
+                                    ? "text-primary-light"
+                                    : "text-gray-300 hover:text-white",
+                                )}
+                              >
+                                {service.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
 
                     {/* CONTACTO */}
                     <div className="border-b border-gray-800 px-6 py-4 cursor-pointer hover:bg-gray-900 transition">
@@ -433,28 +486,32 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
 
                   {/* Social Media Icons */}
                   <div className="border-b border-gray-800 px-6 py-4 flex gap-4 justify-center">
+                    {!isCuadrosUnicos && (
+                      <a
+                        href={siteConfig.links.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-12 h-12 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-white hover:text-white transition"
+                      >
+                        <Facebook size={20} />
+                      </a>
+                    )}
                     <a
-                      href="https://www.facebook.com/VisualDesignPage/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-white hover:text-white transition"
-                    >
-                      <Facebook size={20} />
-                    </a>
-                    <a
-                      href={siteConfig.links.instagram}
+                      href={instagramHref}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-white hover:text-white transition"
                     >
                       <Instagram size={20} />
                     </a>
-                    <a
-                      href="mailto:info@visuald.com.ar"
-                      className="w-12 h-12 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-white hover:text-white transition"
-                    >
-                      <Mail size={20} />
-                    </a>
+                    {!isCuadrosUnicos && (
+                      <a
+                        href={siteConfig.links.mail}
+                        className="w-12 h-12 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-white hover:text-white transition"
+                      >
+                        <Mail size={20} />
+                      </a>
+                    )}
                   </div>
 
                   {/* Phone Button */}

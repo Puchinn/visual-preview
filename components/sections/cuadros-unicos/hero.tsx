@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils";
 
 /** Lo que aporta cada tecnica, en una palabra. */
 const HINTS: Record<string, string> = {
+  vinilo: "Impresión",
   resina: "Brillo",
   led: "Luz",
-  marcos: "Montaje",
-  medida: "Formato",
+  personalizados: "Medida",
 };
 
 /**
@@ -19,17 +19,15 @@ const HINTS: Record<string, string> = {
  * vidriera y ordena la lectura como una ficha técnica.
  */
 export function CuadrosUnicosHero() {
-  const { hero, techniques } = siteConfig.cuadrosUnicos;
+  const { hero, pageTechniques } = siteConfig.cuadrosUnicos;
 
   return (
     <section className="bg-[var(--cu-paper)]">
       <div className="mx-auto max-w-[1400px] px-6 pb-16 pt-10 lg:px-10 lg:pb-24 lg:pt-28">
         <div className="flex items-center justify-between border-b border-[var(--cu-rule)] pb-4 font-cu-mono text-[10px] uppercase tracking-[0.2em] text-[var(--cu-ink-soft)]">
           <span>Cuadros Únicos</span>
-          <span className="hidden sm:inline">
-            Piezas personalizadas — Buenos Aires
-          </span>
-          <span className="sm:hidden">Buenos Aires</span>
+          <span className="hidden sm:inline">Piezas personalizadas — CABA</span>
+          <span className="sm:hidden">CABA</span>
         </div>
 
         <div className="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-12 lg:items-end lg:gap-10">
@@ -39,13 +37,11 @@ export function CuadrosUnicosHero() {
               <br />
               Un cuadro.
               <br />
-              Una pieza
-              <br />
-              Unica.
+              Una pieza única.
             </h1>
 
             <p className="mt-9 max-w-md text-base leading-relaxed text-[var(--cu-ink-soft)] sm:text-lg">
-              {siteConfig.cuadrosUnicos.description}
+              {siteConfig.cuadrosUnicos.pageDescription}
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
@@ -66,10 +62,6 @@ export function CuadrosUnicosHero() {
                 Ver las piezas
               </a>
             </div>
-
-            <p className="mt-8 font-cu-mono text-[10px] uppercase tracking-[0.16em] text-[var(--cu-ink-soft)]">
-              Resina · LED · Marcos · A medida
-            </p>
           </div>
 
           <figure className="lg:col-span-5">
@@ -99,7 +91,7 @@ export function CuadrosUnicosHero() {
       <div className="border-y border-[var(--cu-rule)]">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <ul className="grid grid-cols-2 md:grid-cols-4">
-            {techniques.map((technique, index) => (
+            {pageTechniques.map((technique, index) => (
               <li
                 key={technique.slug}
                 className={cn(

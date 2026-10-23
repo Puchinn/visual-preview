@@ -2,10 +2,10 @@ import { siteConfig } from "@/lib/site-config";
 
 /** La faceta que describe cada tecnica en la ficha. */
 const META: Record<string, string> = {
+  vinilo: "Impresión",
   resina: "Acabado",
   led: "Iluminación",
-  marcos: "Montaje",
-  medida: "Formato",
+  personalizados: "Medida",
 };
 
 /**
@@ -34,15 +34,15 @@ export function CuadrosUnicosTechniques() {
 
           <div className="lg:col-span-5">
             <p className="max-w-md text-base leading-relaxed text-[var(--cu-ink-soft)]">
-              Cuatro formas de llegar al mismo resultado: una imagen tuya,
-              bien impresa y bien montada. Se pueden combinar según la pieza
-              y el lugar donde va.
+              La mayoría de las piezas combinan varias: la impresión UV, la
+              resina, la luz y la medida. Se eligen según la imagen y el lugar
+              donde va.
             </p>
           </div>
         </div>
 
         <div className="mt-12 grid border-l border-t border-[var(--cu-rule)] sm:grid-cols-2 lg:mt-16">
-          {siteConfig.cuadrosUnicos.techniques.map((technique, index) => (
+          {siteConfig.cuadrosUnicos.pageTechniques.map((technique, index) => (
             <article
               key={technique.slug}
               className="flex min-h-[250px] flex-col border-b border-r border-[var(--cu-rule)] p-6 lg:p-8"

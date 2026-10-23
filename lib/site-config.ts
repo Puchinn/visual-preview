@@ -20,7 +20,7 @@ export const siteConfig = {
       grafica:
         "Hola! Te escribo desde la web de Visual Design. Necesito un presupuesto para un trabajo de gráfica (cartelería, vinilos, banners, montados, corpóreos, etc.). ¿Me pueden pasar las opciones y los valores?",
       cuadros:
-        "Hola! Te escribo desde la web de Visual Design. Me interesa CUADROS UNICOS. Quisiera saber más sobre los cuadros personalizados (resina, LED, marcos a medida) y cómo sacar el mío.",
+        "Hola! Te escribo desde la web de Visual Design. Me interesa CUADROS UNICOS. Quisiera saber más sobre las piezas personalizadas (vinilo UV, resina, LED) y cómo encargar la mía.",
     },
   },
   /**
@@ -33,13 +33,27 @@ export const siteConfig = {
     name: "Cuadros Unicos",
     tagline: "Tu imagen, convertida en un cuadro para mirar todos los días",
     description:
-      "Cuadros personalizados con resina, iluminación LED y marcos a medida. Elegís la imagen, el material y el formato, y armamos la pieza con el mismo cuidado con el que imprimimos un cartel.",
+      "Cuadros personalizados en vinilo UV, resina e iluminación LED a medida. Elegís la imagen, el terminado y el formato, y armamos la pieza con el mismo cuidado con el que imprimimos un cartel.",
+    /**
+     * Texto de portada de la pagina de la submarca. Es aparte de
+     * `description` porque ese se sigue usando en el banner de la home y en
+     * el welcome modal, que no forman parte de este ajuste.
+     */
+    pageDescription:
+      "La imagen se imprime en vinilo UV y sobre la impresión se aplica una capa de resina, que le da relieve y brillo. Algunas piezas suman iluminación LED por detrás. Cada trabajo es personalizado: elegís la imagen, la medida y el terminado.",
     path: "/cuadros-unicos",
     // TODO: reemplazar por el Instagram real de CUADROS UNICOS
     instagram: "https://www.instagram.com/cuadrosunicos_visual/",
     logo: "/cuadros-unicos/logo-cuadros-unicos-blanco.svg",
     logoOscuro: "/cuadros-unicos/logo-cuadros-unicos-negro.svg",
+    /** Tecnicas que se listan en el banner de la home (no tocar aca). */
     techniques: [
+      {
+        slug: "vinilo",
+        name: "Vinilo UV",
+        description:
+          "La imagen se imprime en vinilo UV de alta definición: el punto de partida que define el color y el detalle.",
+      },
       {
         slug: "resina",
         name: "Resina",
@@ -53,16 +67,41 @@ export const siteConfig = {
           "Una luz LED por detrás ilumina la imagen desde atrás. La pared también se enciende: el cuadro proyecta su propio resplandor.",
       },
       {
-        slug: "marcos",
-        name: "Marcos",
-        description:
-          "Madera, aluminio anodizado o negro mate. Cada marco se arma a medida y se cuelga con el sistema que corresponde a la pared.",
-      },
-      {
         slug: "medida",
         name: "A medida",
         description:
           "Horizontal, vertical o cuadrado, con el tamaño que pida el lugar donde va. Vos elegís la imagen; nosotros la medimos.",
+      },
+    ],
+    /**
+     * Las cuatro fichas de la página. El orden es el del proceso: primero la
+     * impresión, después el acabado, la luz y la medida. Los marcos no se
+     * presentan como característica porque las piezas no los usan.
+     */
+    pageTechniques: [
+      {
+        slug: "vinilo",
+        name: "Vinilo UV",
+        description:
+          "La imagen se imprime en vinilo UV. Es el punto de partida de cada pieza: ahí se define el color y el detalle de la imagen.",
+      },
+      {
+        slug: "resina",
+        name: "Resina",
+        description:
+          "Sobre la impresión se aplica una capa de resina epóxica, con relieve y brillo de cristal. Se ve desde cualquier ángulo.",
+      },
+      {
+        slug: "led",
+        name: "LED",
+        description:
+          "Algunas piezas llevan una luz LED que ilumina la imagen desde atrás. La pared también se enciende: el cuadro proyecta su propio resplandor.",
+      },
+      {
+        slug: "personalizados",
+        name: "Personalizados",
+        description:
+          "Cada trabajo se hace a medida: horizontal, vertical o cuadrado, con el tamaño que pida el lugar donde va. Vos elegís la imagen; nosotros la medimos.",
       },
     ],
     /**
@@ -120,6 +159,8 @@ export const siteConfig = {
      * `recursos/reels-2026/` y `scripts/make-cuadros-reels.mjs` emite la
      * versión liviana para la web más el poster. La `duration` es sólo para
      * el epígrafe de la tira. Para pasar a CDN, cambiar `src` y `poster`.
+     * Los reels 05 y 06 se sacaron de la tira a pedido del cliente; la
+     * numeración visible es la del índice, así que quedan 01 a 06.
      */
     reels: [
       {
@@ -141,16 +182,6 @@ export const siteConfig = {
         src: "/videos/cuadros-unicos/reel-04.mp4",
         poster: "/images/cuadros-unicos/reels/reel-04.webp",
         duration: "00:14",
-      },
-      {
-        src: "/videos/cuadros-unicos/reel-05.mp4",
-        poster: "/images/cuadros-unicos/reels/reel-05.webp",
-        duration: "00:36",
-      },
-      {
-        src: "/videos/cuadros-unicos/reel-06.mp4",
-        poster: "/images/cuadros-unicos/reels/reel-06.webp",
-        duration: "00:31",
       },
       {
         src: "/videos/cuadros-unicos/reel-07.mp4",

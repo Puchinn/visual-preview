@@ -4,18 +4,19 @@ import { CuadrosUnicosTechniques } from "@/components/sections/cuadros-unicos/te
 import { CuadrosUnicosGallery } from "@/components/sections/cuadros-unicos/gallery";
 import { CuadrosUnicosReels } from "@/components/sections/cuadros-unicos/reels";
 import { CuadrosUnicosContact } from "@/components/sections/cuadros-unicos/contact";
+import { CuadrosUnicosFloatingCta } from "@/components/sections/cuadros-unicos/floating-cta";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Cuadros Unicos | Cuadros Personalizados en Resina y LED",
   description:
-    "Cuadros personalizados con resina, iluminación LED y marcos a medida. Elegí tu imagen y armamos la pieza.",
+    "Cuadros personalizados con impresión en vinilo UV, resina e iluminación LED. Elegí tu imagen y armamos la pieza a medida.",
   alternates: {
     canonical: siteConfig.cuadrosUnicos.path,
   },
   openGraph: {
     title: "Cuadros Unicos | Cuadros Personalizados",
-    description: siteConfig.cuadrosUnicos.description,
+    description: siteConfig.cuadrosUnicos.pageDescription,
     url: `${siteConfig.url}${siteConfig.cuadrosUnicos.path}`,
   },
 };
@@ -34,6 +35,7 @@ export default function CuadrosUnicosPage() {
         instagram={siteConfig.cuadrosUnicos.instagram}
       />
       <CuadrosUnicosContact />
+      <CuadrosUnicosFloatingCta />
     </main>
   );
 }

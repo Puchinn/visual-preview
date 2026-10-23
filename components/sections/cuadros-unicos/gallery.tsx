@@ -81,7 +81,7 @@ export function CuadrosUnicosGallery({
           <div className="max-w-sm">
             <p className="text-base leading-relaxed text-white/60">
               Una selección de piezas reales del taller. La luz, la resina y
-              el marco cambian según el lugar; por eso conviene verlas en
+              el formato cambian según el lugar; por eso conviene verlas en
               persona.
             </p>
             <a

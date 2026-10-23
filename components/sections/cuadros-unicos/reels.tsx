@@ -91,9 +91,8 @@ export function CuadrosUnicosReels({
 
           <div className="lg:col-span-5">
             <p className="max-w-md text-base leading-relaxed text-[var(--cu-ink-soft)]">
-              Videos cortos del taller: la resina, la luz y el marco en
-              movimiento. Sin renders ni poses: las piezas reales, filmadas
-              mientras se terminan.
+              Videos cortos del taller: el vinilo UV, la resina y la luz en
+              movimiento.
             </p>
             <a
               href={instagram}

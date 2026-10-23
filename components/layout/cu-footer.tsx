@@ -12,7 +12,7 @@ import { siteConfig } from "@/lib/site-config";
  */
 export function CuFooter() {
   const waHref = `${siteConfig.links.whatsapp}?text=${encodeURIComponent(
-    siteConfig.links.whatsappMessages.cuadros
+    siteConfig.links.whatsappMessages.cuadros,
   )}`;
 
   return (
@@ -24,7 +24,7 @@ export function CuFooter() {
         <div className="grid gap-12 border-b border-white/15 pb-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-6">
             <p className="font-cu-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-              Piezas personalizadas — Buenos Aires
+              Piezas personalizadas — CABA
             </p>
             <Link
               href={siteConfig.cuadrosUnicos.path}
@@ -39,10 +39,6 @@ export function CuFooter() {
                 className="h-auto w-[220px] sm:w-[280px]"
               />
             </Link>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/55">
-              Piezas personalizadas en resina, LED y marcos a medida. Una
-              marca de Visual Design.
-            </p>
           </div>
 
           <nav
@@ -103,16 +99,8 @@ export function CuFooter() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
                 >
-                  @cuadrosunicos
+                  @cuadrosunicos_visual
                   <ArrowUpRight className="size-3.5" aria-hidden />
-                </a>
-              </li>
-              <li>
-                <a
-                  href={siteConfig.links.mail}
-                  className="transition-colors hover:text-white"
-                >
-                  info@visuald.com.ar
                 </a>
               </li>
               <li>
@@ -127,17 +115,24 @@ export function CuFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 pt-6 font-cu-mono text-[10px] uppercase tracking-[0.14em] text-white/35 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Cuadros Únicos</p>
-          <p>
-            Una marca de{" "}
-            <Link
-              href="/"
-              className="text-white/65 underline underline-offset-4 transition-colors hover:text-white"
-            >
-              Visual Design
-            </Link>
+        <div className="flex flex-col gap-5 pt-6 sm:flex-row sm:items-end sm:justify-between">
+          <p className="font-cu-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
+            © {new Date().getFullYear()} Cuadros Únicos
           </p>
+          <div className="font-cu-mono text-[10px] uppercase tracking-[0.14em] text-white/35 sm:text-right">
+            <p className="text-[11px] normal-case leading-relaxed tracking-[0.02em] text-white/50">
+              Piezas personalizadas en vinilo UV, resina e iluminación LED.
+            </p>
+            <p className="mt-2">
+              Una marca de{" "}
+              <Link
+                href="/"
+                className="text-white/65 underline underline-offset-4 transition-colors hover:text-white"
+              >
+                Visual Design
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
