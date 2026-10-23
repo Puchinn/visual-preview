@@ -33,10 +33,11 @@ export default function Home() {
       </div>
       <Experience />
       <Services />
-      <CuadrosUnicosBanner />
       <CarouselLastProjects />
+      <CuadrosUnicosBanner />
       <Clients />
       <FaqSection />
+
       <Footer />
       <FloatingButtons />
     </div>

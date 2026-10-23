@@ -36,8 +36,8 @@ export const siteConfig = {
       "Cuadros personalizados en vinilo UV, resina e iluminación LED a medida. Elegís la imagen, el terminado y el formato, y armamos la pieza con el mismo cuidado con el que imprimimos un cartel.",
     /**
      * Texto de portada de la pagina de la submarca. Es aparte de
-     * `description` porque ese se sigue usando en el banner de la home y en
-     * el welcome modal, que no forman parte de este ajuste.
+     * `description` porque ese se sigue usando en el welcome modal y en la
+     * home sólo como texto largo de marca.
      */
     pageDescription:
       "La imagen se imprime en vinilo UV y sobre la impresión se aplica una capa de resina, que le da relieve y brillo. Algunas piezas suman iluminación LED por detrás. Cada trabajo es personalizado: elegís la imagen, la medida y el terminado.",
@@ -46,37 +46,22 @@ export const siteConfig = {
     instagram: "https://www.instagram.com/cuadrosunicos_visual/",
     logo: "/cuadros-unicos/logo-cuadros-unicos-blanco.svg",
     logoOscuro: "/cuadros-unicos/logo-cuadros-unicos-negro.svg",
-    /** Tecnicas que se listan en el banner de la home (no tocar aca). */
-    techniques: [
-      {
-        slug: "vinilo",
-        name: "Vinilo UV",
-        description:
-          "La imagen se imprime en vinilo UV de alta definición: el punto de partida que define el color y el detalle.",
-      },
-      {
-        slug: "resina",
-        name: "Resina",
-        description:
-          "La imagen va encapsulada en una capa de resina epóxica, con relieve y brillo de cristal. Se ve desde cualquier ángulo.",
-      },
-      {
-        slug: "led",
-        name: "LED",
-        description:
-          "Una luz LED por detrás ilumina la imagen desde atrás. La pared también se enciende: el cuadro proyecta su propio resplandor.",
-      },
-      {
-        slug: "medida",
-        name: "A medida",
-        description:
-          "Horizontal, vertical o cuadrado, con el tamaño que pida el lugar donde va. Vos elegís la imagen; nosotros la medimos.",
-      },
-    ],
     /**
-     * Las cuatro fichas de la página. El orden es el del proceso: primero la
-     * impresión, después el acabado, la luz y la medida. Los marcos no se
-     * presentan como característica porque las piezas no los usan.
+     * Bloque de derivación de la home, entre Servicios y Últimos proyectos.
+     * Es un módulo corto a propósito: la home sólo presenta la submarca y
+     * manda a /cuadros-unicos, donde viven técnicas, piezas y reels.
+     */
+    homeBanner: {
+      title: "¿Venís por un cuadro?",
+      blurb:
+        "Cuadros personalizados en vinilo UV, resina e iluminación LED, hechos a medida en CABA.",
+      cta: "Ver Cuadros Únicos",
+      ctaSecondary: "Consultar por WhatsApp",
+    },
+    /**
+     * Técnicas de la página de la submarca. El orden es el del proceso:
+     * primero la impresión, después el acabado, la luz y la medida. Los marcos
+     * no se presentan como característica porque las piezas no los usan.
      */
     pageTechniques: [
       {
