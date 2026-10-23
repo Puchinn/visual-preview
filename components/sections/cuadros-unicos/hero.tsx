@@ -23,7 +23,7 @@ export function CuadrosUnicosHero() {
 
   return (
     <section className="bg-[var(--cu-paper)]">
-      <div className="mx-auto max-w-[1400px] px-6 pb-16 pt-10 lg:px-10 lg:pb-24 lg:pt-28">
+      <div className="mx-auto max-w-[1400px] px-6 pb-16 pt-10 lg:px-10 lg:pb-24 lg:pt-12">
         <div className="flex items-center justify-between border-b border-[var(--cu-rule)] pb-4 font-cu-mono text-[10px] uppercase tracking-[0.2em] text-[var(--cu-ink-soft)]">
           <span>Cuadros Únicos</span>
           <span className="hidden sm:inline">Piezas personalizadas — CABA</span>

@@ -1,22 +1,13 @@
 "use client";
 
 import { Instagram } from "lucide-react";
-import { useIntent } from "@/components/providers/intent-provider";
 import { siteConfig } from "@/lib/site-config";
 
 export function InstagramFloatButton() {
-  const { intent } = useIntent();
-
-  // Los visitantes que vienen por CUADROS UNICOS van al IG de la submarca.
-  const href =
-    intent === "cuadros"
-      ? siteConfig.cuadrosUnicos.instagram
-      : siteConfig.links.instagram;
-
-  const tooltip =
-    intent === "cuadros"
-      ? "Conocé los cuadros que hacemos"
-      : "Conoce nuestros últimos posts";
+  // Estos botones no se muestran en /cuadros-unicos (ver floating-buttons), así
+  // que el IG es siempre el de Visual Design.
+  const href = siteConfig.links.instagram;
+  const tooltip = "Conoce nuestros últimos posts";
 
   return (
     <div className="group">

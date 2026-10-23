@@ -42,7 +42,6 @@ import {
   useActiveNav,
   type NavVariant,
 } from "@/components/layout/nav-item";
-import { useIntent } from "@/components/providers/intent-provider";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site-config";
 
@@ -51,7 +50,6 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const isActive = useActiveNav();
   const pathname = usePathname();
-  const { intent } = useIntent();
 
   // En la pagina de la submarca la barra queda solo con la marca, las redes,
   // CONTACTO y el CTA de WhatsApp. INICIO, NOSOTROS y SERVICIOS son de Visual
@@ -59,8 +57,8 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
   const isCuadrosUnicos = pathname === siteConfig.cuadrosUnicos.path;
 
   const whatsappHref = `${siteConfig.links.whatsapp}?text=${encodeURIComponent(
-    intent
-      ? siteConfig.links.whatsappMessages[intent]
+    isCuadrosUnicos
+      ? siteConfig.links.whatsappMessages.cuadros
       : siteConfig.links.whatsappMessages.general,
   )}`;
 
@@ -82,6 +80,7 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
       className={cn(
         "site-navbar font-archivo relative lg:py-5 w-full top-0 max-w-[1400px] z-50 mx-auto",
         isDark && "font-cu-ui",
+        isCuadrosUnicos && "lg:pt-8",
       )}
     >
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -234,7 +233,9 @@ export function Navbar({ variant = "light" }: { variant?: NavVariant }) {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <span className="sr-only">Siguenos en facebook</span>
+                            <span className="sr-only">
+                              Siguenos en facebook
+                            </span>
                             <FacebookIcon />
                           </a>
                         </TooltipTrigger>

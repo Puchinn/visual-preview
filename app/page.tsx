@@ -8,7 +8,7 @@ import { FaqSection } from "@/components/sections/faqs-section";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/responsive-navbar/navbar";
 import { InitialAnimation } from "@/components/initial-animation";
-import { WelcomeModal } from "@/components/sections/welcome-modal";
+import { CuTour } from "@/components/sections/cu-tour";
 import { CuadrosUnicosBanner } from "@/components/sections/cuadros-unicos-banner";
 import { FloatingButtons } from "@/components/ui/floating-buttons";
 import { CarouselLastProjects } from "@/components/ui/carousel-last-projects";
@@ -21,7 +21,7 @@ export default function Home() {
         Design
       </h1>
       <InitialAnimation />
-      <WelcomeModal />
+      <CuTour />
       <div className="relative">
         <FadeBackground />
         <Navbar />

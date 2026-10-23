@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -12,10 +12,12 @@ import {
   Facebook,
   Instagram,
   ChevronUp,
+  ArrowRight,
 } from "lucide-react";
 import { CustomLogo } from "@/components/branding/custom-logo-animated/custom-logo";
-import { useIntent } from "@/components/providers/intent-provider";
 import { NavItem, useActiveNav } from "@/components/layout/nav-item";
+import { useIntro } from "@/components/providers/intro-provider";
+import { hasSeenCuTour, markCuTourSeen } from "@/lib/cu-tour";
 import { cn } from "@/lib/utils";
 
 import {
@@ -41,7 +43,9 @@ import { siteConfig } from "@/lib/site-config";
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const { intent } = useIntent();
+  const [nudge, setNudge] = useState(false);
+  const { hasPlayed } = useIntro();
+  const nudgeClosed = useRef(false);
   const isActive = useActiveNav();
 
   const services = Object.values(siteConfig.pages.services).map((service) => ({
@@ -50,14 +54,76 @@ export function Navbar() {
   }));
 
   const whatsappHref = `${siteConfig.links.whatsapp}?text=${encodeURIComponent(
-    intent
-      ? siteConfig.links.whatsappMessages[intent]
-      : siteConfig.links.whatsappMessages.general
+    siteConfig.links.whatsappMessages.general
   )}`;
+
+  const dismissNudge = useCallback(() => {
+    if (nudgeClosed.current) return;
+    nudgeClosed.current = true;
+    setNudge(false);
+  }, []);
+
+  const openMenuFromNudge = () => {
+    dismissNudge();
+    setIsOpen(true);
+  };
+
+  // Aviso de mobile: después de la intro, sólo en pantallas chicas, arriba de
+  // todo y una vez por navegador. Después, el punto de la hamburguesa y la pill
+  // del menú quedan como recordatorio permanente.
+  useEffect(() => {
+    if (!hasPlayed) return;
+
+    const forced =
+      new URLSearchParams(window.location.search).get("cuTour") === "1";
+
+    if (!forced && hasSeenCuTour()) return;
+    if (!window.matchMedia("(max-width: 1023px)").matches) return;
+    if (window.scrollY > 8) return;
+
+    const timer = window.setTimeout(() => {
+      if (window.scrollY > 8 || nudgeClosed.current) return;
+      setNudge(true);
+      markCuTourSeen();
+    }, 600);
+
+    return () => window.clearTimeout(timer);
+  }, [hasPlayed]);
+
+  // Cierre: 7 s, X, Escape, scroll o al abrir el menú.
+  useEffect(() => {
+    if (!nudge) return;
+
+    const timer = window.setTimeout(dismissNudge, 7000);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") dismissNudge();
+    };
+    const onScroll = () => dismissNudge();
+    const onResize = () => {
+      if (window.matchMedia("(min-width: 1024px)").matches) dismissNudge();
+    };
+
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [nudge, dismissNudge]);
 
   return (
     <header className="font-archivo w-full relative max-w-[1400px] z-50 bg-none mx-auto">
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <Sheet
+        open={isOpen}
+        onOpenChange={(open) => {
+          setIsOpen(open);
+          if (open) dismissNudge();
+        }}
+      >
         <div className="w-full max-w-none">
           <div className="w-full">
             {/* Desktop Navigation */}
@@ -95,13 +161,26 @@ export function Navbar() {
                       </NavItem>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                      <NavItem
-                        href={siteConfig.cuadrosUnicos.path}
-                        variant="dark"
-                        active={isActive(siteConfig.cuadrosUnicos.path)}
-                      >
-                        CUADROS UNICOS
-                      </NavItem>
+                      <span data-cu-tour-link className="inline-flex">
+                        <NavItem
+                          href={siteConfig.cuadrosUnicos.path}
+                          variant="dark"
+                          active={isActive(siteConfig.cuadrosUnicos.path)}
+                          className="group relative inline-flex items-center gap-2"
+                        >
+                          CUADROS UNICOS
+                          <span className="sr-only">(nuevo)</span>
+                          <span
+                            aria-hidden
+                            className="relative flex size-1.5 shrink-0"
+                          >
+                            <span className="absolute inset-0 rounded-full bg-primary-light" />
+                            <span className="absolute left-1/2 top-full z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded-sm bg-white px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-gray-tone-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
+                              Nuevo
+                            </span>
+                          </span>
+                        </NavItem>
+                      </span>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                       <NavigationMenuTrigger className="bg-transparent text-base p-0 m-0 text-white">
@@ -225,12 +304,65 @@ export function Navbar() {
               </div>
               <SheetTrigger className="z-20 relative" asChild>
                 <button
-                  className="px-3 text-black hover:text-gray-300 transition-colors"
+                  className="relative px-3 text-black hover:text-gray-300 transition-colors"
                   aria-label="Toggle menu"
                 >
                   {isOpen ? <X size={24} /> : <Menu size={24} />}
+                  <span
+                    aria-hidden
+                    className="absolute right-1 top-0 size-2 rounded-full bg-primary ring-2 ring-white"
+                  />
                 </button>
               </SheetTrigger>
+
+              {/*
+                Aviso no bloqueante: señala la hamburguesa, que es el único
+                camino al link en mobile. No oscurece la página ni abre el menú
+                solo. Se borra con la X, a los 7 s, al scrollear o al abrirlo.
+              */}
+              {nudge && (
+                <div
+                  role="dialog"
+                  aria-labelledby="cu-nudge-title"
+                  className="absolute left-3 top-full z-30 mt-2 w-[17rem] rounded-sm bg-white p-4 text-gray-tone-4 shadow-[0_18px_40px_rgba(0,0,0,0.2)]"
+                >
+                  <span
+                    aria-hidden
+                    className="absolute -top-1.5 left-1.5 size-3 rotate-45 bg-white"
+                  />
+
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
+                      Nuevo
+                    </span>
+                    <button
+                      type="button"
+                      onClick={dismissNudge}
+                      aria-label="Cerrar aviso"
+                      className="-mr-1 -mt-1 p-1 text-gray-tone-3 transition-colors hover:text-gray-tone-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-tone-4"
+                    >
+                      <X className="size-4" aria-hidden />
+                    </button>
+                  </div>
+
+                  <p id="cu-nudge-title" className="mt-2 text-sm font-semibold">
+                    Cuadros Únicos ya está en el menú
+                  </p>
+                  <p className="mt-1 text-xs leading-relaxed text-gray-600">
+                    Piezas a medida en vinilo UV, resina y LED.
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={openMenuFromNudge}
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-colors hover:text-primary-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                  >
+                    Abrir el menú
+                    <ArrowRight className="size-3.5" aria-hidden />
+                  </button>
+                </div>
+              )}
+
               <SheetContent className="">
                 <nav className="bg-black pt-10 text-sm text-white min-h-screen flex flex-col">
                   {/* Menu Items */}
@@ -265,9 +397,12 @@ export function Navbar() {
                         href={siteConfig.cuadrosUnicos.path}
                         variant="dark"
                         active={isActive(siteConfig.cuadrosUnicos.path)}
-                        className="font-bold tracking-wide"
+                        className="inline-flex items-center gap-2 font-bold tracking-wide"
                       >
                         CUADROS UNICOS
+                        <span className="rounded-full bg-primary px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-white">
+                          Nuevo
+                        </span>
                       </NavItem>
                     </div>
 

@@ -1,22 +1,11 @@
 "use client";
 
-import { useIntent } from "@/components/providers/intent-provider";
-import { siteConfig, type SiteIntent } from "@/lib/site-config";
-
-const TOOLTIPS: Record<SiteIntent, string> = {
-  grafica: "Consultanos por tu trabajo de gráfica",
-  cuadros: "Consultanos por tu cuadro",
-};
+import { siteConfig } from "@/lib/site-config";
 
 export function FloatingWsp() {
-  const { intent } = useIntent();
-
-  // Sin intención declarada usamos el mensaje general.
-  const message = intent
-    ? siteConfig.links.whatsappMessages[intent]
-    : siteConfig.links.whatsappMessages.general;
+  const message = siteConfig.links.whatsappMessages.general;
   const href = `${siteConfig.links.whatsapp}?text=${encodeURIComponent(message)}`;
-  const tooltip = intent ? TOOLTIPS[intent] : "Chatea con nosotros";
+  const tooltip = "Chatea con nosotros";
 
   return (
     <div className="group">

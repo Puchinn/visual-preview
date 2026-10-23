@@ -32,12 +32,8 @@ export const siteConfig = {
   cuadrosUnicos: {
     name: "Cuadros Unicos",
     tagline: "Tu imagen, convertida en un cuadro para mirar todos los días",
-    description:
-      "Cuadros personalizados en vinilo UV, resina e iluminación LED a medida. Elegís la imagen, el terminado y el formato, y armamos la pieza con el mismo cuidado con el que imprimimos un cartel.",
     /**
-     * Texto de portada de la pagina de la submarca. Es aparte de
-     * `description` porque ese se sigue usando en el welcome modal y en la
-     * home sólo como texto largo de marca.
+     * Texto de portada de la pagina de la submarca.
      */
     pageDescription:
       "La imagen se imprime en vinilo UV y sobre la impresión se aplica una capa de resina, que le da relieve y brillo. Algunas piezas suman iluminación LED por detrás. Cada trabajo es personalizado: elegís la imagen, la medida y el terminado.",
@@ -236,8 +232,3 @@ export const siteConfig = {
 };
 
 export type SiteConfig = typeof siteConfig;
-
-/** Motivo declarado por el visitante en el modal de bienvenida. */
-export type SiteIntent = "grafica" | "cuadros";
-
-export const INTENT_KEY = "visuald-intent";
