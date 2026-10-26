@@ -8,7 +8,8 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/VisualDesignPage/",
     instagram: "https://www.instagram.com/visualgrafica1996",
     mail: "mailto:info@visuald.com.ar",
-    whatsapp: "https://wa.me/5491173593738",
+    whatsapp: "https://wa.me/5491154990028",
+    tel: "tel:+5491143829100",
     /**
      * Mensajes pre-cargados de WhatsApp. El `intent` lo elige el visitante en el
      * modal de bienvenida y se conserva en localStorage, así cada consulta

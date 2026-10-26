@@ -6,6 +6,7 @@ import {
   ArrowRight,
   MapPin,
 } from "lucide-react";
+import { siteConfig } from "@/lib/site-config";
 
 interface ContactCard {
   id: string;
@@ -24,7 +25,7 @@ export default function ContactInfoSection() {
       title: "Lineas de atención",
       description: ["(011) 4382-9100/9400"],
       action: "Llamar",
-      href: "tel:+5491143829100",
+      href: siteConfig.links.tel,
     },
     {
       id: "appointment",
@@ -32,15 +33,15 @@ export default function ContactInfoSection() {
       title: "Email de contacto",
       description: ["info@visuald.com.ar"],
       action: "Agendar",
-      href: "mailto:info@visuald.com.ar",
+      href: siteConfig.links.mail,
     },
     {
       id: "whatsapp",
       icon: <MessageCircle className="w-8 h-8" />,
       title: "Escribinos por WhatsApp",
-      description: ["+54 9 11 7359 3738"],
+      description: ["+54 9 11 54990028"],
       action: "Chatear",
-      href: "https://wa.me/5491173593738",
+      href: `${siteConfig.links.whatsapp}/?text=${siteConfig.links.whatsappMessages.grafica}`,
     },
     {
       id: "map",

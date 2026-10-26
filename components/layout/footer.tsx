@@ -168,7 +168,7 @@ export function Footer() {
                 <ul className="space-y-3">
                   <li>
                     <a
-                      href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20un%20diseño%20personalizado..."
+                      href={`${siteConfig.links.whatsapp}?text=Hola%2C%20te%20escribo%20desde%20la%20web%20de%20Visual%20Design.%20Me%20gustaría%20solicitar%20un%20diseño%20personalizado.`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-slate-300 hover:text-primary transition-colors text-sm"
@@ -178,7 +178,7 @@ export function Footer() {
                   </li>
                   <li>
                     <a
-                      href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20una%20instalación..."
+                      href={`${siteConfig.links.whatsapp}?text=Hola%2C%20te%20escribo%20desde%20la%20web%20de%20Visual%20Design.%20Me%20gustaría%20solicitar%20información%20sobre%20el%20servicio%20de%20instalación.`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-slate-300 hover:text-primary transition-colors text-sm"
@@ -188,7 +188,7 @@ export function Footer() {
                   </li>
                   <li>
                     <a
-                      href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20un%20asesoramiento..."
+                      href={`${siteConfig.links.whatsapp}?text=Hola%2C%20te%20escribo%20desde%20la%20web%20de%20Visual%20Design.%20Me%20gustaría%20solicitar%20asesoramiento.`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-slate-300 hover:text-primary transition-colors text-sm"
@@ -198,7 +198,7 @@ export function Footer() {
                   </li>
                   <li>
                     <a
-                      href="https://wa.me/5491173593738?text=Hola%2C%20me%20gustaría%20solicitar%20un%20envío%20a%20domicilio..."
+                      href={`${siteConfig.links.whatsapp}?text=Hola%2C%20te%20escribo%20desde%20la%20web%20de%20Visual%20Design.%20Me%20gustaría%20solicitar%20información%20sobre%20envíos%20a%20domicilio.`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-slate-300 hover:text-primary transition-colors text-sm"
