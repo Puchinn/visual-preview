@@ -20,7 +20,7 @@ export const siteConfig = {
       grafica:
         "Hola! Te escribo desde la web de Visual Design. Necesito un presupuesto para un trabajo de gráfica (cartelería, vinilos, banners, montados, corpóreos, etc.). ¿Me pueden pasar las opciones y los valores?",
       cuadros:
-        "Hola! Te escribo desde la web de Visual Design. Me interesa CUADROS UNICOS. Quisiera saber más sobre las piezas personalizadas (vinilo UV, resina, LED) y cómo encargar la mía.",
+        "¡Hola! Vengo desde la web de Visual Design. Me interesa encargar un Cuadro Único personalizado. ¿Me podrían dar información sobre los acabados (LED, resina, vinilo) y la forma de trabajo?",
     },
   },
   /**
@@ -92,7 +92,7 @@ export const siteConfig = {
      * Para actualizar la vidriera, reemplazar los archivos y esta lista.
      */
     hero: {
-      src: "/images/cuadros-unicos/piezas/acdc.webp",
+      src: "/images/cuadros-unicos/piezas-color/acdc.webp",
       title: "AC/DC",
       technique: "LED",
       alt: "Pieza de AC/DC con el logo y el retrato iluminados por LED, apoyada en el taller",
@@ -145,32 +145,32 @@ export const siteConfig = {
      */
     reels: [
       {
-        src: "/videos/cuadros-unicos/reel-01.mp4",
+        src: "https://emvhaucupegutxrejsno.supabase.co/storage/v1/object/public/public_videos/reel-01.mp4",
         poster: "/images/cuadros-unicos/reels/reel-01.webp",
         duration: "00:27",
       },
       {
-        src: "/videos/cuadros-unicos/reel-02.mp4",
+        src: "https://emvhaucupegutxrejsno.supabase.co/storage/v1/object/public/public_videos/reel-02.mp4",
         poster: "/images/cuadros-unicos/reels/reel-02.webp",
         duration: "00:23",
       },
       {
-        src: "/videos/cuadros-unicos/reel-03.mp4",
+        src: "https://emvhaucupegutxrejsno.supabase.co/storage/v1/object/public/public_videos/reel-03.mp4",
         poster: "/images/cuadros-unicos/reels/reel-03.webp",
         duration: "00:19",
       },
       {
-        src: "/videos/cuadros-unicos/reel-04.mp4",
+        src: "https://emvhaucupegutxrejsno.supabase.co/storage/v1/object/public/public_videos/reel-04.mp4",
         poster: "/images/cuadros-unicos/reels/reel-04.webp",
         duration: "00:14",
       },
       {
-        src: "/videos/cuadros-unicos/reel-07.mp4",
+        src: "https://emvhaucupegutxrejsno.supabase.co/storage/v1/object/public/public_videos/reel-07.mp4",
         poster: "/images/cuadros-unicos/reels/reel-07.webp",
         duration: "00:06",
       },
       {
-        src: "/videos/cuadros-unicos/reel-08.mp4",
+        src: "https://emvhaucupegutxrejsno.supabase.co/storage/v1/object/public/public_videos/reel-08.mp4",
         poster: "/images/cuadros-unicos/reels/reel-08.webp",
         duration: "00:10",
       },
