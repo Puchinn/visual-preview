@@ -19,7 +19,7 @@
 
 # binarios de cuadros unicos (pesan mucho; se regeneran desde recursos/)
 /public/videos/
-/public/images/cuadros-unicos/reels/
+
 
 # next.js
 /.next/
